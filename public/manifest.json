@@ -1,0 +1,11 @@
+{
+  "name": "YourCoachAgent",
+  "short_name": "CoachAgent",
+  "description": "Professional coaching that fits your life",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#fafaf9",
+  "theme_color": "#1c1917",
+  "icons": []
+}
+

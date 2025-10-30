@@ -11,19 +11,27 @@ export interface User {
 
 export async function signIn(email: string, password: string): Promise<User | null> {
   try {
+    console.log('Auth: Attempting sign in for:', email);
+    
     // Sign in with Supabase
     const { user: authUser } = await signInWithEmail(email, password);
     
     if (!authUser) {
+      console.error('Auth: No auth user returned');
       return null;
     }
+    
+    console.log('Auth: Supabase auth successful, user ID:', authUser.id);
 
     // Get user profile from database
     const profile = await getUserProfile(authUser.id);
     
     if (!profile) {
+      console.error('Auth: No profile found for user:', authUser.id);
       return null;
     }
+    
+    console.log('Auth: Profile loaded:', profile.email, profile.role);
 
     const user: User = {
       id: profile.id,
@@ -35,10 +43,11 @@ export async function signIn(email: string, password: string): Promise<User | nu
     
     // Store in localStorage
     setCurrentUser(user);
+    console.log('Auth: User stored in localStorage');
     
     return user;
   } catch (error) {
-    console.error('Sign in error:', error);
+    console.error('Auth: Sign in error:', error);
     return null;
   }
 }

@@ -5,65 +5,34 @@ import { Button } from '@/components/ui/button';
 import { Card, CardContent } from '@/components/ui/card';
 import { Mic, Video, Calendar, TrendingUp, Target, Shield } from 'lucide-react';
 import { PublicHeader } from '@/components/public-header';
+import { useLanguage } from '@/lib/i18n/language-context';
 
 export default function HomePage() {
   const router = useRouter();
-
-  const features = [
-    {
-      icon: Mic,
-      title: 'AI Voice Coach',
-      description: 'Natural conversations with AI that understands your goals'
-    },
-    {
-      icon: Video,
-      title: 'Video Sessions',
-      description: 'Connect with certified ICF coaches face-to-face'
-    },
-    {
-      icon: Calendar,
-      title: 'Smart Scheduling',
-      description: 'Book sessions that fit your life, not the other way around'
-    },
-    {
-      icon: Target,
-      title: 'Track Progress',
-      description: 'Watch your commitments turn into achievements'
-    },
-    {
-      icon: TrendingUp,
-      title: 'Continuous Growth',
-      description: 'Build momentum with weekly check-ins and insights'
-    },
-    {
-      icon: Shield,
-      title: 'ICF Certified',
-      description: 'Coaching that follows international standards'
-    }
-  ];
+  const { t } = useLanguage();
 
   const packages = [
     {
-      name: 'Basic',
+      name: t.packages.basic.name,
       price: '$400',
-      duration: '4 weeks',
-      sessions: '4 sessions',
-      features: ['30-min sessions', 'Weekly check-ins', 'AI voice coach', '2 reading materials']
+      duration: t.packages.basic.duration,
+      sessions: t.packages.basic.sessions,
+      features: t.packages.basic.features
     },
     {
-      name: 'Standard',
+      name: t.packages.standard.name,
       price: '$750',
-      duration: '8 weeks',
-      sessions: '8 sessions',
-      features: ['45-min sessions', 'Bi-weekly check-ins', 'AI + human coach', '3 reading materials', 'Progress reports'],
+      duration: t.packages.standard.duration,
+      sessions: t.packages.standard.sessions,
+      features: t.packages.standard.features,
       popular: true
     },
     {
-      name: 'Premium',
+      name: t.packages.premium.name,
       price: '$1,200',
-      duration: '12 weeks',
-      sessions: '12 sessions',
-      features: ['60-min sessions', 'Weekly check-ins', 'Priority support', '4 reading materials', 'Detailed reports', 'Video sessions']
+      duration: t.packages.premium.duration,
+      sessions: t.packages.premium.sessions,
+      features: t.packages.premium.features
     }
   ];
 
@@ -73,33 +42,34 @@ export default function HomePage() {
       <div className="min-h-screen bg-stone-50">
         {/* Hero Section - Full Width Background Image */}
         <section className="relative min-h-screen flex items-center justify-center overflow-hidden">
-          {/* Background Image with Overlay */}
+          {/* Background Image */}
           <div className="absolute inset-0 z-0">
-            <div className="absolute inset-0 bg-gradient-to-b from-stone-900/85 via-stone-900/75 to-stone-900/85 z-10" />
             <img 
-              src="https://oaidalleapiprodscus.blob.core.windows.net/private/org-f9Em0rNqAYCCGj3R3Vme71nJ/user-dFWLjafRmCzW4LrOX7mbPBRO/img-lIuHnO3GFdidLwvUVHIPXYeg.png?st=2025-10-30T15%3A38%3A44Z&se=2025-10-30T17%3A38%3A44Z&sp=r&sv=2024-08-04&sr=b&rscd=inline&rsct=image/png&skoid=8b33a531-2df9-46a3-bc02-d4b1430a422c&sktid=a48cca56-e6da-484e-a814-9c849652bcb3&skt=2025-10-30T16%3A38%3A44Z&ske=2025-10-31T16%3A38%3A44Z&sks=b&skv=2024-08-04&sig=3tHx34jZCPXNCAzJ%2BS93tHnnkFPyEV5lqwWcS6ANyTo%3D"
-              alt="Professional coaching"
-              className="w-full h-full object-cover object-center"
+              src="/images/hero/coaching-hero.jpg"
+              alt="Professional coaching environment"
+              className="w-full h-full object-cover"
             />
+            {/* Dark overlay for text readability */}
+            <div className="absolute inset-0 bg-gradient-to-b from-stone-900/70 via-stone-900/60 to-stone-900/70 z-10" />
           </div>
           
           {/* Hero Content */}
           <div className="relative z-20 w-full max-w-5xl mx-auto px-6 py-20 md:py-32 text-center">
             <h1 className="text-5xl sm:text-6xl md:text-7xl lg:text-8xl font-bold text-white mb-6 md:mb-8 leading-[1.1] tracking-tight">
-              Your coach.<br />
-              <span className="text-white/90">Always there.</span><br />
-              <span className="text-white/80">Always listening.</span>
+              {t.hero.title[0]}<br />
+              <span className="text-white/90">{t.hero.title[1]}</span><br />
+              <span className="text-white/80">{t.hero.title[2]}</span>
             </h1>
             <p className="text-lg sm:text-xl md:text-2xl lg:text-3xl text-white/95 mb-10 md:mb-16 max-w-3xl mx-auto font-light leading-relaxed px-4">
-              Professional coaching that fits your life.
-              <span className="block mt-2">AI-powered sessions, human wisdom, real results.</span>
+              {t.hero.subtitle[0]}
+              <span className="block mt-2">{t.hero.subtitle[1]}</span>
             </p>
             <div className="flex justify-center px-4">
               <button
                 onClick={() => router.push('/signup')}
                 className="px-10 py-3.5 bg-white text-stone-900 rounded-full text-base font-medium hover:bg-stone-100 transition-colors shadow-lg"
               >
-                Get Started
+                {t.hero.cta}
               </button>
             </div>
           </div>
@@ -119,22 +89,21 @@ export default function HomePage() {
             <div className="order-2 md:order-1">
               <div className="relative aspect-square rounded-3xl overflow-hidden bg-stone-100">
                 <img 
-                  src="https://oaidalleapiprodscus.blob.core.windows.net/private/org-f9Em0rNqAYCCGj3R3Vme71nJ/user-dFWLjafRmCzW4LrOX7mbPBRO/img-qeSLgTlhErhkdZPJL82dEczO.png?st=2025-10-30T15%3A45%3A23Z&se=2025-10-30T17%3A45%3A23Z&sp=r&sv=2024-08-04&sr=b&rscd=inline&rsct=image/png&skoid=ed3ea2f9-5e38-44be-9a1b-7c1e65e4d54f&sktid=a48cca56-e6da-484e-a814-9c849652bcb3&skt=2025-10-29T22%3A36%3A34Z&ske=2025-10-30T22%3A36%3A34Z&sks=b&skv=2024-08-04&sig=uYKRT/%2BGpe6i2Zu4YHBf%2BcIGkqZAga54CLmsxqkb9O4%3D"
+                  src="/images/features/voice-coach.jpg"
                   alt="AI Voice Coach"
                   className="w-full h-full object-cover"
                 />
               </div>
             </div>
             <div className="order-1 md:order-2 space-y-4 text-center md:text-left">
-              <h2 className="text-4xl md:text-6xl font-bold text-stone-900 leading-tight">
-                Your AI coach.<br />
-                Available anytime.
+              <h2 className="text-4xl md:text-6xl font-bold text-stone-900 leading-tight whitespace-pre-line">
+                {t.features.voiceCoach.title}
               </h2>
               <p className="text-xl md:text-2xl text-stone-600 leading-relaxed">
-                Hold to speak. Get instant guidance. Build momentum between sessions with a coach that never sleeps.
+                {t.features.voiceCoach.subtitle}
               </p>
               <p className="text-base md:text-lg text-stone-600">
-                Our AI voice coach understands your goals, remembers your commitments, and asks the powerful questions that unlock new perspectives. It's like having an ICF-certified coach in your pocket, ready whenever inspiration strikes.
+                {t.features.voiceCoach.description}
               </p>
             </div>
           </div>
@@ -146,21 +115,20 @@ export default function HomePage() {
         <div className="max-w-7xl mx-auto px-4">
           <div className="grid md:grid-cols-2 gap-12 md:gap-16 items-center">
             <div className="space-y-4 text-center md:text-left">
-              <h2 className="text-4xl md:text-6xl font-bold text-stone-900 leading-tight">
-                Real coaches.<br />
-                Real transformation.
+              <h2 className="text-4xl md:text-6xl font-bold text-stone-900 leading-tight whitespace-pre-line">
+                {t.features.humanCoaching.title}
               </h2>
               <p className="text-xl md:text-2xl text-stone-600 leading-relaxed">
-                Connect with ICF-certified professionals who've guided thousands through their toughest leadership challenges.
+                {t.features.humanCoaching.subtitle}
               </p>
               <p className="text-base md:text-lg text-stone-600">
-                Video or phone. Your choice. Book sessions that fit your schedule and connect with coaches who understand the unique pressures of modern leadership. Every session follows proven ICF frameworks designed to create lasting change.
+                {t.features.humanCoaching.description}
               </p>
             </div>
             <div>
               <div className="relative aspect-square rounded-3xl overflow-hidden bg-stone-100">
                 <img 
-                  src="https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?q=80&w=1024&auto=format&fit=crop"
+                  src="/images/features/video-session.jpg"
                   alt="Human Coaching"
                   className="w-full h-full object-cover"
                 />
@@ -177,22 +145,21 @@ export default function HomePage() {
             <div className="order-2 md:order-1">
               <div className="relative aspect-square rounded-3xl overflow-hidden bg-stone-100">
                 <img 
-                  src="https://images.unsplash.com/photo-1551836022-d5d88e9218df?q=80&w=1024&auto=format&fit=crop"
+                  src="/images/features/progress-tracking.jpg"
                   alt="Progress Tracking"
                   className="w-full h-full object-cover"
                 />
               </div>
             </div>
             <div className="order-1 md:order-2 space-y-4 text-center md:text-left">
-              <h2 className="text-4xl md:text-6xl font-bold text-stone-900 leading-tight">
-                See yourself grow.<br />
-                Week by week.
+              <h2 className="text-4xl md:text-6xl font-bold text-stone-900 leading-tight whitespace-pre-line">
+                {t.features.progressTracking.title}
               </h2>
               <p className="text-xl md:text-2xl text-stone-600 leading-relaxed">
-                Track commitments. Measure confidence. Watch patterns emerge as small actions compound into major breakthroughs.
+                {t.features.progressTracking.subtitle}
               </p>
               <p className="text-base md:text-lg text-stone-600">
-                Our progress system shows you what's working. Visual dashboards reveal your growth trajectory, while weekly check-ins keep you accountable. See your confidence scores rise as you build the habits that make great leaders.
+                {t.features.progressTracking.description}
               </p>
             </div>
           </div>
@@ -204,10 +171,10 @@ export default function HomePage() {
         <div className="max-w-4xl mx-auto px-4">
           <div className="text-center mb-12">
             <h2 className="text-4xl md:text-6xl font-bold text-stone-900 mb-4 leading-tight">
-              Choose your journey
+              {t.packages.heading}
             </h2>
             <p className="text-lg md:text-xl text-stone-600">
-              All packages include AI voice coaching and ICF-certified human support
+              {t.packages.subtitle}
             </p>
           </div>
           
@@ -224,7 +191,7 @@ export default function HomePage() {
                 {pkg.popular && (
                   <div className="absolute -top-3 left-6">
                     <span className="bg-stone-900 text-white text-xs font-semibold px-3 py-1 rounded-full">
-                      Most Popular
+                      {t.packages.mostPopular}
                     </span>
                   </div>
                 )}
@@ -256,16 +223,16 @@ export default function HomePage() {
                   
                   {/* Right: CTA */}
                   <div className="md:flex-shrink-0">
-                    <button
-                      onClick={() => router.push('/signup')}
-                      className={`w-full md:w-auto px-8 py-3 rounded-full text-base font-medium transition-colors ${
-                        pkg.popular
-                          ? 'bg-stone-900 text-white hover:bg-stone-800'
-                          : 'bg-stone-100 text-stone-900 hover:bg-stone-200'
-                      }`}
-                    >
-                      Get Started
-                    </button>
+                      <button
+                        onClick={() => router.push('/signup')}
+                        className={`w-full md:w-auto px-8 py-3 rounded-full text-base font-medium transition-colors ${
+                          pkg.popular
+                            ? 'bg-stone-900 text-white hover:bg-stone-800'
+                            : 'bg-stone-100 text-stone-900 hover:bg-stone-200'
+                        }`}
+                      >
+                        {t.common.getStarted}
+                      </button>
                   </div>
                 </div>
               </div>
@@ -278,17 +245,17 @@ export default function HomePage() {
       <section className="py-20 px-4 bg-stone-900 text-white">
         <div className="max-w-4xl mx-auto text-center">
           <h2 className="text-3xl md:text-5xl font-bold mb-6">
-            Ready to become the leader you're meant to be?
+            {t.cta.main}
           </h2>
           <p className="text-xl text-stone-300 mb-12">
-            Join hundreds of managers who've transformed their teams and careers
+            {t.cta.description}
           </p>
           <Button 
             size="lg" 
             className="text-lg px-8 py-6 bg-white text-stone-900 hover:bg-stone-100"
             onClick={() => router.push('/signup')}
           >
-            Start Your Journey
+            {t.cta.button}
           </Button>
         </div>
       </section>
@@ -296,25 +263,25 @@ export default function HomePage() {
       {/* Footer */}
       <footer className="py-12 px-4 bg-white border-t border-stone-200">
         <div className="max-w-6xl mx-auto text-center text-stone-600">
-          <p className="mb-4">© 2025 YourCoachAgent. All rights reserved.</p>
+          <p className="mb-4">{t.footer.copyright}</p>
           <div className="flex justify-center gap-6 text-sm">
             <button 
               onClick={() => router.push('/privacy')}
               className="hover:text-stone-900 transition-colors"
             >
-              Privacy
+              {t.footer.privacy}
             </button>
             <button 
               onClick={() => router.push('/terms')}
               className="hover:text-stone-900 transition-colors"
             >
-              Terms
+              {t.footer.terms}
             </button>
             <button 
               onClick={() => router.push('/contact')}
               className="hover:text-stone-900 transition-colors"
             >
-              Contact
+              {t.footer.contact}
             </button>
           </div>
         </div>

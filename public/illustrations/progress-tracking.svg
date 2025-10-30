@@ -1,0 +1,44 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 800" fill="none">
+  <!-- Background -->
+  <rect width="800" height="800" fill="#FAF5FF"/>
+  
+  <!-- Person sitting with laptop -->
+  <g transform="translate(250, 300)">
+    <!-- Head -->
+    <circle cx="120" cy="60" r="40" fill="none" stroke="#1C1917" stroke-width="3"/>
+    
+    <!-- Hair -->
+    <path d="M 85 50 Q 85 20 120 20 Q 155 20 155 50" fill="#1C1917"/>
+    
+    <!-- Body (sitting) -->
+    <path d="M 120 100 L 120 180" stroke="#1C1917" stroke-width="3" stroke-linecap="round"/>
+    
+    <!-- Arms typing -->
+    <path d="M 120 130 L 80 180" stroke="#1C1917" stroke-width="3" stroke-linecap="round"/>
+    <path d="M 120 130 L 160 180" stroke="#1C1917" stroke-width="3" stroke-linecap="round"/>
+    
+    <!-- Legs (sitting) -->
+    <path d="M 120 180 L 100 240" stroke="#1C1917" stroke-width="3" stroke-linecap="round"/>
+    <path d="M 120 180 L 140 240" stroke="#1C1917" stroke-width="3" stroke-linecap="round"/>
+    <path d="M 100 240 L 80 240" stroke="#1C1917" stroke-width="3" stroke-linecap="round"/>
+    <path d="M 140 240 L 160 240" stroke="#1C1917" stroke-width="3" stroke-linecap="round"/>
+    
+    <!-- Laptop -->
+    <rect x="50" y="180" width="140" height="80" rx="5" fill="none" stroke="#1C1917" stroke-width="3"/>
+    <line x1="50" y1="190" x2="190" y2="190" stroke="#1C1917" stroke-width="3"/>
+    
+    <!-- Chart on laptop screen -->
+    <polyline points="70,210 90,200 110,215 130,195 150,205 170,190" 
+              stroke="#D946EF" stroke-width="3" fill="none" stroke-linecap="round"/>
+    <circle cx="70" cy="210" r="4" fill="#D946EF"/>
+    <circle cx="90" cy="200" r="4" fill="#D946EF"/>
+    <circle cx="110" cy="215" r="4" fill="#D946EF"/>
+    <circle cx="130" cy="195" r="4" fill="#D946EF"/>
+    <circle cx="150" cy="205" r="4" fill="#D946EF"/>
+    <circle cx="170" cy="190" r="4" fill="#D946EF"/>
+  </g>
+  
+  <!-- Shadow under person -->
+  <ellipse cx="370" cy="540" rx="80" ry="15" fill="#1C1917" opacity="0.1"/>
+</svg>
+

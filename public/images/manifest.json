@@ -1,0 +1,42 @@
+[
+  {
+    "name": "voice-coach",
+    "category": "features",
+    "path": "/images/features/voice-coach.png",
+    "filename": "voice-coach.png",
+    "size": "1024x1024",
+    "prompt": "Modern minimalist illustration of AI voice coaching concept. Person using wireless earbuds in professional setting, warm natural lighting, clean beige and white tones, premium aesthetic. iPhone advertisement style, clean composition, professional photography."
+  },
+  {
+    "name": "video-session",
+    "category": "features",
+    "path": "/images/features/video-session.png",
+    "filename": "video-session.png",
+    "size": "1024x1024",
+    "prompt": "Professional video coaching session, modern minimalist aesthetic. Two people in video call, warm lighting, clean professional environment. Beige and white color palette, high-end commercial photography style, Apple advertisement aesthetic."
+  },
+  {
+    "name": "icf-certified",
+    "category": "features",
+    "path": "/images/features/icf-certified.png",
+    "filename": "icf-certified.png",
+    "size": "1024x1024",
+    "prompt": "Professional ICF certification and coaching standards concept. Modern minimalist design, professional business environment, warm beige and white palette. Certificate or badge in elegant setting, commercial photography style."
+  },
+  {
+    "name": "apple-watch",
+    "category": "wearables",
+    "path": "/images/wearables/apple-watch.png",
+    "filename": "apple-watch.png",
+    "size": "1024x1024",
+    "prompt": "Apple Watch on professional wrist in modern office environment. Clean minimalist composition, warm natural lighting, beige and white tones. iPhone advertisement style, premium product photography, sophisticated aesthetic. Show health tracking features."
+  },
+  {
+    "name": "oura-ring",
+    "category": "wearables",
+    "path": "/images/wearables/oura-ring.png",
+    "filename": "oura-ring.png",
+    "size": "1024x1024",
+    "prompt": "Oura Ring on hand in professional setting, minimalist aesthetic. Clean modern composition, warm beige tones, natural lighting. Premium product photography, Apple advertisement style, sophisticated and elegant. Show wellness tracking concept."
+  }
+]

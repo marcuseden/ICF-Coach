@@ -15,7 +15,7 @@ export const coaches: Coach[] = [
     id: '1',
     name: 'Sarah Martinez',
     title: 'Senior Executive Coach',
-    image: 'https://images.unsplash.com/photo-1580489944761-15a19d654956?w=400&h=600&fit=crop&crop=faces',
+    image: '/images/coaches/coach-female-1.jpg',
     bio: 'ICF-certifierad coach med 15 års erfarenhet av ledarutveckling',
     specialties: ['Ledarskap', 'Teamutveckling', 'Kommunikation']
   },
@@ -23,7 +23,7 @@ export const coaches: Coach[] = [
     id: '2',
     name: 'Michael Chen',
     title: 'Leadership Coach',
-    image: 'https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=400&h=600&fit=crop&crop=faces',
+    image: '/images/coaches/coach-male-1.jpg',
     bio: 'Specialist på att utveckla nya chefer och team leaders',
     specialties: ['Karriärutveckling', 'Konflikthantering', 'Motivation']
   },
@@ -31,7 +31,7 @@ export const coaches: Coach[] = [
     id: '3',
     name: 'Emma Johansson',
     title: 'Executive Leadership Coach',
-    image: 'https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?w=400&h=600&fit=crop&crop=faces',
+    image: '/images/coaches/coach-female-2.jpg',
     bio: 'Erfaren coach för VD:ar och ledningsgrupper',
     specialties: ['Strategiskt ledarskap', 'Förändringsledning', 'Kulturfrågor']
   },
@@ -39,7 +39,7 @@ export const coaches: Coach[] = [
     id: '4',
     name: 'David Thompson',
     title: 'Senior Leadership Consultant',
-    image: 'https://images.unsplash.com/photo-1560250097-0b93528c311a?w=400&h=600&fit=crop&crop=faces',
+    image: '/images/coaches/coach-male-2.jpg',
     bio: 'Över 20 års erfarenhet av ledarutveckling i globala företag',
     specialties: ['Global ledarskap', 'Organisationsutveckling', 'Mentorskap']
   }

@@ -1,0 +1,25 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 400" fill="none">
+  <!-- Background -->
+  <rect width="400" height="400" fill="#0C0A09"/>
+  
+  <!-- Smart Ring -->
+  <g transform="translate(200, 200)">
+    <!-- Outer ring -->
+    <circle cx="0" cy="0" r="80" fill="none" stroke="#E7E5E4" stroke-width="25"/>
+    
+    <!-- Inner ring (thickness) -->
+    <circle cx="0" cy="0" r="67" fill="#0C0A09"/>
+    
+    <!-- Sensor area (small rectangle on ring) -->
+    <rect x="-15" y="-85" width="30" height="20" rx="4" fill="#D946EF" opacity="0.8"/>
+    
+    <!-- Small indicator lights -->
+    <circle cx="-8" cy="-76" r="2" fill="#1C1917"/>
+    <circle cx="0" cy="-76" r="2" fill="#1C1917"/>
+    <circle cx="8" cy="-76" r="2" fill="#1C1917"/>
+    
+    <!-- Subtle shine effect -->
+    <path d="M -50 -50 Q -40 -60 -30 -50" stroke="#FFFFFF" stroke-width="3" opacity="0.3" stroke-linecap="round"/>
+  </g>
+</svg>
+

@@ -55,30 +55,36 @@ export default function VoiceSessionPage() {
       // Initialize ElevenLabs agent
       agentRef.current = new ElevenLabsCoachAgent();
       console.log('✅ Agent initialized');
+      console.log('🌍 Platform:', agentRef.current.getPlatform());
       
-      // Start conversation
+      // Start conversation (generates session ID)
       const conversationId = await agentRef.current.startConversation();
-      console.log('✅ Conversation started:', conversationId);
+      console.log('✅ Conversation ID:', conversationId);
       
-      // Connect WebSocket
-      agentRef.current.connectWebSocket(
+      // Connect WebSocket and wait for it to be ready
+      await agentRef.current.connectWebSocket(
         (message: string, audio?: ArrayBuffer) => {
-          console.log('📨 Received message:', message);
-          if (audio) {
-            console.log('🔊 Playing audio response');
-            // Audio will be played automatically by the agent
+          if (message) {
+            console.log('📨 Transcript:', message);
           }
+          // Audio is played automatically by the agent
         },
         (error: Error) => {
           console.error('❌ WebSocket error:', error);
-          setError('Connection lost. Please try again.');
+          setError('Anslutningen förlorades. Försök igen.');
           setIsConnected(false);
         }
       );
       
+      console.log('✅ WebSocket connected and ready');
+      
+      // Start recording from microphone
+      await agentRef.current.startRecording();
+      console.log('🎤 Microphone active - continuous streaming');
+      
       setIsConnected(true);
       setIsConnecting(false);
-      console.log('✅ Voice session active');
+      console.log('✅ Voice session fully active');
       
     } catch (error: any) {
       console.error('❌ Failed to start voice session:', error);

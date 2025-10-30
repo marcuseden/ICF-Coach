@@ -1,0 +1,35 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 400" fill="none">
+  <!-- Background -->
+  <rect width="400" height="400" fill="#0C0A09"/>
+  
+  <!-- Fitness Band -->
+  <g transform="translate(120, 150)">
+    <!-- Band strap left -->
+    <path d="M 40 40 Q 30 50 30 70 L 30 130 Q 30 150 40 160" 
+          fill="none" stroke="#E7E5E4" stroke-width="20"/>
+    
+    <!-- Main module -->
+    <rect x="40" y="80" width="80" height="40" rx="8" fill="none" stroke="#E7E5E4" stroke-width="3"/>
+    <rect x="45" y="85" width="70" height="30" rx="5" fill="#1C1917" stroke="#E7E5E4" stroke-width="2"/>
+    
+    <!-- Display elements -->
+    <g transform="translate(55, 92)">
+      <!-- Activity rings -->
+      <circle cx="10" cy="8" r="6" fill="none" stroke="#D946EF" stroke-width="2" opacity="0.8"/>
+      <path d="M 10 2 A 6 6 0 0 1 16 8" fill="none" stroke="#D946EF" stroke-width="2"/>
+      
+      <!-- Data display -->
+      <rect x="22" y="3" width="25" height="3" rx="1" fill="#E7E5E4" opacity="0.6"/>
+      <rect x="22" y="8" width="20" height="3" rx="1" fill="#E7E5E4" opacity="0.4"/>
+      <rect x="22" y="13" width="15" height="3" rx="1" fill="#E7E5E4" opacity="0.3"/>
+    </g>
+    
+    <!-- Band strap right -->
+    <path d="M 120 40 Q 130 50 130 70 L 130 130 Q 130 150 120 160" 
+          fill="none" stroke="#E7E5E4" stroke-width="20"/>
+    
+    <!-- Small side button -->
+    <circle cx="45" cy="100" r="3" fill="#E7E5E4"/>
+  </g>
+</svg>
+

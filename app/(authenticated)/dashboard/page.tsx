@@ -6,17 +6,24 @@ import { getCurrentUser } from '@/lib/auth';
 import { Card, CardContent } from '@/components/ui/card';
 import { AppFooter } from '@/components/app-footer';
 import { AppHeader } from '@/components/app-header';
+import { useLanguage } from '@/lib/i18n/language-context';
 
 export default function DashboardPage() {
   const router = useRouter();
+  const { t } = useLanguage();
   const [user, setUser] = useState<any>(null);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     const currentUser = getCurrentUser();
+    console.log('Dashboard: Checking auth, user:', currentUser);
+    
     if (!currentUser) {
-      router.push('/login');
+      console.log('Dashboard: No user found, redirecting to login');
+      // Use window.location for hard redirect
+      window.location.href = '/login';
     } else {
+      console.log('Dashboard: User authenticated:', currentUser.email);
       setUser(currentUser);
       setLoading(false);
     }
@@ -25,7 +32,7 @@ export default function DashboardPage() {
   if (loading) {
     return (
       <div className="min-h-screen flex items-center justify-center bg-stone-50">
-        <p className="text-stone-600">Laddar...</p>
+        <p className="text-stone-600">{t.common.loading}</p>
       </div>
     );
   }
@@ -33,8 +40,8 @@ export default function DashboardPage() {
   return (
     <div className="min-h-screen bg-stone-50">
       <AppHeader 
-        title={`Hej ${user?.name || 'där'}!`}
-        subtitle="Välkommen tillbaka"
+        title={`${t.dashboard.greeting} ${user?.name || 'där'}!`}
+        subtitle={t.dashboard.welcomeBack}
       />
 
       <div className="max-w-2xl mx-auto px-4 py-6 pb-24 space-y-4">
@@ -49,14 +56,14 @@ export default function DashboardPage() {
               {/* Round Coach Image */}
               <div className="w-16 h-16 rounded-full overflow-hidden flex-shrink-0 border-2 border-stone-200">
                 <img 
-                  src="https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?w=200&h=200&fit=crop&crop=faces"
+                  src="/images/coaches/coach-female-1.jpg"
                   alt="AI Coach"
                   className="w-full h-full object-cover"
                 />
               </div>
               <div className="flex-1">
-                <h3 className="font-semibold text-lg text-stone-900 mb-1">Prata med din coach</h3>
-                <p className="text-sm text-stone-600">Starta ett röstsamtal med din AI-coach</p>
+                <h3 className="font-semibold text-lg text-stone-900 mb-1">{t.dashboard.quickActions.talkToCoach}</h3>
+                <p className="text-sm text-stone-600">{t.dashboard.quickActions.startVoiceCall}</p>
               </div>
               {/* Green Phone Button */}
               <div className="w-14 h-14 rounded-full bg-green-500 flex items-center justify-center flex-shrink-0 shadow-lg hover:bg-green-600 transition-colors">
@@ -76,15 +83,15 @@ export default function DashboardPage() {
           <CardContent className="pt-6 pb-6">
             <div className="flex items-start justify-between">
               <div className="flex-1">
-                <h3 className="font-semibold text-base text-stone-900 mb-3">Kommande sessioner</h3>
+                <h3 className="font-semibold text-base text-stone-900 mb-3">{t.dashboard.upcomingSessions}</h3>
                 <div className="space-y-2">
                   <div className="flex items-center gap-3">
                     <div className="w-2 h-2 rounded-full bg-purple-600"></div>
-                    <span className="text-sm text-stone-700">Nästa session: Tisdag 14:00</span>
+                    <span className="text-sm text-stone-700">{t.dashboard.nextSession}Tisdag 14:00</span>
                   </div>
                   <div className="flex items-center gap-3">
                     <div className="w-2 h-2 rounded-full bg-stone-300"></div>
-                    <span className="text-sm text-stone-600">1 bokad session</span>
+                    <span className="text-sm text-stone-600">1 {t.dashboard.bookedSessions}</span>
                   </div>
                 </div>
               </div>
@@ -97,24 +104,24 @@ export default function DashboardPage() {
 
         {/* Progress Section */}
         <div>
-          <h2 className="text-lg font-semibold text-stone-900 mb-3 px-1">Din progress</h2>
+          <h2 className="text-lg font-semibold text-stone-900 mb-3 px-1">{t.dashboard.progress.title}</h2>
           <div className="grid grid-cols-3 gap-3">
             <Card className="border-stone-200 bg-white">
               <CardContent className="pt-5 pb-5 text-center">
                 <p className="text-3xl font-bold text-stone-900 mb-1">4</p>
-                <p className="text-xs text-stone-600">Sessioner</p>
+                <p className="text-xs text-stone-600">{t.dashboard.progress.sessions}</p>
               </CardContent>
             </Card>
             <Card className="border-stone-200 bg-white">
               <CardContent className="pt-5 pb-5 text-center">
                 <p className="text-3xl font-bold text-stone-900 mb-1">2</p>
-                <p className="text-xs text-stone-600">Aktiva mål</p>
+                <p className="text-xs text-stone-600">{t.dashboard.progress.activeGoals}</p>
               </CardContent>
             </Card>
             <Card className="border-stone-200 bg-white">
               <CardContent className="pt-5 pb-5 text-center">
                 <p className="text-3xl font-bold text-stone-900 mb-1">8.5</p>
-                <p className="text-xs text-stone-600">Förtroende</p>
+                <p className="text-xs text-stone-600">{t.dashboard.progress.confidence}</p>
               </CardContent>
             </Card>
           </div>
@@ -123,12 +130,12 @@ export default function DashboardPage() {
         {/* Today's Focus */}
         <Card className="border-stone-200 bg-white">
           <CardContent className="pt-6 pb-6">
-            <h3 className="font-semibold text-base text-stone-900 mb-3">Dagens fokus</h3>
+            <h3 className="font-semibold text-base text-stone-900 mb-3">{t.dashboard.todaysFocus}</h3>
             <p className="text-sm text-stone-700 leading-relaxed mb-4">
-              Fortsätt bygga förtroende med ditt team genom individuella samtal. Ta dig tid att verkligen lyssna och ställa öppna frågor.
+              {t.dashboard.todaysFocusText}
             </p>
             <div className="flex items-center gap-2 text-sm text-purple-600 font-medium">
-              <span>Visa åtaganden</span>
+              <span>{t.dashboard.showCommitments}</span>
               <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
               </svg>
@@ -149,9 +156,9 @@ export default function DashboardPage() {
                 </svg>
               </div>
               <div className="flex-1">
-                <h3 className="font-semibold text-base text-stone-900 mb-1">Fortsätt läsa</h3>
+                <h3 className="font-semibold text-base text-stone-900 mb-1">{t.dashboard.continueReading}</h3>
                 <p className="text-sm text-stone-600">Hantera fjärrteam effektivt</p>
-                <p className="text-xs text-stone-500 mt-1">12 min läsning</p>
+                <p className="text-xs text-stone-500 mt-1">12 {t.dashboard.minuteRead}</p>
               </div>
               <svg className="w-5 h-5 text-stone-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />

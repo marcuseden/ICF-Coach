@@ -1,0 +1,50 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 800" fill="none">
+  <!-- Background -->
+  <rect width="800" height="800" fill="#FAF5FF"/>
+  
+  <!-- Person on left -->
+  <g transform="translate(150, 250)">
+    <!-- Head -->
+    <circle cx="80" cy="70" r="40" fill="none" stroke="#1C1917" stroke-width="3"/>
+    
+    <!-- Hair -->
+    <path d="M 45 60 Q 45 30 80 30 Q 115 30 115 60" fill="#1C1917"/>
+    
+    <!-- Body -->
+    <path d="M 80 110 L 80 220" stroke="#1C1917" stroke-width="3" stroke-linecap="round"/>
+    <path d="M 80 140 L 40 180" stroke="#1C1917" stroke-width="3" stroke-linecap="round"/>
+    <path d="M 80 140 L 120 180" stroke="#1C1917" stroke-width="3" stroke-linecap="round"/>
+  </g>
+  
+  <!-- Screen/mirror between them -->
+  <g transform="translate(350, 200)">
+    <rect x="0" y="0" width="120" height="180" rx="8" fill="none" stroke="#1C1917" stroke-width="4"/>
+    <path d="M 10 10 L 110 170" stroke="#1C1917" stroke-width="2" opacity="0.2"/>
+    <path d="M 110 10 L 10 170" stroke="#1C1917" stroke-width="2" opacity="0.2"/>
+    
+    <!-- Person in screen -->
+    <circle cx="60" cy="60" r="25" fill="none" stroke="#1C1917" stroke-width="2"/>
+    <path d="M 60 85 L 60 130" stroke="#1C1917" stroke-width="2" stroke-linecap="round"/>
+  </g>
+  
+  <!-- Person on right -->
+  <g transform="translate(520, 250)">
+    <!-- Head -->
+    <circle cx="60" cy="70" r="40" fill="none" stroke="#1C1917" stroke-width="3"/>
+    
+    <!-- Body -->
+    <path d="M 60 110 L 60 220" stroke="#1C1917" stroke-width="3" stroke-linecap="round"/>
+    <path d="M 60 140 L 20 180" stroke="#1C1917" stroke-width="3" stroke-linecap="round"/>
+    <path d="M 60 140 L 100 180" stroke="#1C1917" stroke-width="3" stroke-linecap="round"/>
+  </g>
+  
+  <!-- Connection line with heart -->
+  <g transform="translate(320, 400)">
+    <path d="M 0 0 Q 80 -20 160 0" stroke="#D946EF" stroke-width="3" fill="none" stroke-linecap="round"/>
+    
+    <!-- Heart speech bubble -->
+    <circle cx="80" cy="-30" r="20" fill="white" stroke="#1C1917" stroke-width="2"/>
+    <path d="M 75 -35 Q 75 -40 80 -40 Q 85 -40 85 -35 Q 85 -28 80 -23 Q 75 -28 75 -35 Z" fill="#D946EF"/>
+  </g>
+</svg>
+

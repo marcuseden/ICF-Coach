@@ -38,7 +38,7 @@ export default function ReadingPage() {
       category: 'Ledarskap',
       readTime: '12 min',
       progress: 45,
-      image: 'https://images.unsplash.com/photo-1522071820081-009f0129c71c?w=400&h=300&fit=crop'
+      image: '/images/reading/reading-1.jpg'
     },
     {
       id: '2',
@@ -47,7 +47,7 @@ export default function ReadingPage() {
       category: 'Coaching',
       readTime: '8 min',
       progress: 0,
-      image: 'https://images.unsplash.com/photo-1517245386807-bb43f82c33c4?w=400&h=300&fit=crop'
+      image: '/images/reading/reading-2.jpg'
     },
     {
       id: '3',
@@ -56,7 +56,7 @@ export default function ReadingPage() {
       category: 'Teamutveckling',
       readTime: '15 min',
       progress: 100,
-      image: 'https://images.unsplash.com/photo-1556761175-b413da4baf72?w=400&h=300&fit=crop'
+      image: '/images/reading/reading-3.jpg'
     },
     {
       id: '4',
@@ -65,7 +65,7 @@ export default function ReadingPage() {
       category: 'Kommunikation',
       readTime: '10 min',
       progress: 0,
-      image: 'https://images.unsplash.com/photo-1552664730-d307ca884978?w=400&h=300&fit=crop'
+      image: '/images/reading/reading-4.jpg'
     }
   ];
 
@@ -193,7 +193,7 @@ export default function ReadingPage() {
                 >
                   <CardContent className="p-0">
                     <div className="flex gap-0">
-                      <div className="w-28 h-28 flex-shrink-0 overflow-hidden bg-stone-200 relative">
+                      <div className="w-28 h-28 flex-shrink-0 overflow-hidden bg-stone-200 relative ml-4 my-4 rounded-lg">
                         <img 
                           src={material.image}
                           alt={material.title}

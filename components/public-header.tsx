@@ -4,10 +4,13 @@ import { useState } from 'react';
 import { useRouter } from 'next/navigation';
 import { Button } from './ui/button';
 import { Menu, X } from 'lucide-react';
+import { LanguageSwitcher } from './language-switcher';
+import { useLanguage } from '@/lib/i18n/language-context';
 
 export function PublicHeader() {
   const router = useRouter();
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const { t } = useLanguage();
 
   const navigation = [
     { name: 'Features', href: '/features' },
@@ -47,27 +50,31 @@ export function PublicHeader() {
 
             {/* Desktop Auth Buttons */}
             <div className="hidden md:flex items-center space-x-3">
+              <div className="mr-2">
+                <LanguageSwitcher />
+              </div>
               <button
                 onClick={() => router.push('/login')}
                 className="px-4 py-1.5 text-sm text-white hover:text-white/80 transition-colors"
               >
-                Log In
+                {t.nav.login}
               </button>
               <button
                 onClick={() => router.push('/signup')}
                 className="px-4 py-1.5 bg-white text-stone-900 rounded-full text-sm font-medium hover:bg-stone-100 transition-colors"
               >
-                Get Started
+                {t.common.getStarted}
               </button>
             </div>
 
             {/* Mobile Auth & Menu */}
             <div className="md:hidden flex items-center gap-3">
+              <LanguageSwitcher />
               <button
                 onClick={() => router.push('/login')}
                 className="text-sm text-white/90 hover:text-white font-medium"
               >
-                Log In
+                {t.nav.login}
               </button>
               <button
                 onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
@@ -107,7 +114,7 @@ export function PublicHeader() {
                   }}
                   className="w-full px-4 py-2.5 bg-white text-stone-900 rounded-full text-sm font-medium hover:bg-stone-100 transition-colors"
                 >
-                  Get Started
+                  {t.common.getStarted}
                 </button>
               </div>
             </div>

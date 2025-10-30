@@ -3,29 +3,31 @@
 import { usePathname, useRouter } from 'next/navigation';
 import { Home, Calendar, Plus, MessageSquare, Menu } from 'lucide-react';
 import { Button } from '@/components/ui/button';
+import { useLanguage } from '@/lib/i18n/language-context';
 
 export function AppFooter() {
   const pathname = usePathname();
   const router = useRouter();
+  const { t } = useLanguage();
 
   const navItems = [
     { 
       id: 'home', 
-      label: 'Hem', 
+      label: t.nav.home, 
       icon: Home, 
       path: '/dashboard',
       color: 'text-stone-700'
     },
     { 
       id: 'sessions', 
-      label: 'Sessioner', 
+      label: t.nav.sessions, 
       icon: Calendar, 
       path: '/sessions/upcoming',
       color: 'text-stone-700'
     },
     { 
       id: 'book', 
-      label: 'Boka', 
+      label: t.nav.book, 
       icon: Plus, 
       path: '/sessions/book',
       color: 'text-stone-700',
@@ -33,14 +35,14 @@ export function AppFooter() {
     },
     { 
       id: 'messages', 
-      label: 'Meddelanden', 
+      label: t.nav.commitments, 
       icon: MessageSquare, 
       path: '/commitments',
       color: 'text-stone-700'
     },
     { 
       id: 'menu', 
-      label: 'Meny', 
+      label: t.nav.menu, 
       icon: Menu, 
       path: '/settings',
       color: 'text-stone-700'

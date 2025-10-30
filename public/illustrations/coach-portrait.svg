@@ -1,0 +1,26 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 400" fill="none">
+  <!-- Background -->
+  <rect width="400" height="400" fill="#FAF5FF"/>
+  
+  <!-- Person portrait -->
+  <g transform="translate(120, 80)">
+    <!-- Head -->
+    <circle cx="80" cy="80" r="60" fill="none" stroke="#1C1917" stroke-width="3"/>
+    
+    <!-- Hair -->
+    <path d="M 30 65 Q 30 20 80 20 Q 130 20 130 65" fill="#1C1917"/>
+    
+    <!-- Eyes -->
+    <circle cx="65" cy="75" r="3" fill="#1C1917"/>
+    <circle cx="95" cy="75" r="3" fill="#1C1917"/>
+    
+    <!-- Smile -->
+    <path d="M 60 95 Q 80 105 100 95" stroke="#1C1917" stroke-width="2" stroke-linecap="round" fill="none"/>
+    
+    <!-- Neck & shoulders -->
+    <path d="M 55 135 Q 80 145 105 135" stroke="#1C1917" stroke-width="3" stroke-linecap="round"/>
+    <path d="M 35 140 Q 40 160 45 180" stroke="#1C1917" stroke-width="3" stroke-linecap="round"/>
+    <path d="M 125 140 Q 120 160 115 180" stroke="#1C1917" stroke-width="3" stroke-linecap="round"/>
+  </g>
+</svg>
+

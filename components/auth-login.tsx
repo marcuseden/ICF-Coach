@@ -7,7 +7,8 @@ import { Button } from './ui/button';
 import { Input } from './ui/input';
 import { Label } from './ui/label';
 import { Separator } from './ui/separator';
-import { Apple, Mail } from 'lucide-react';
+import { Apple } from 'lucide-react';
+import { signIn } from '@/lib/auth';
 
 interface AuthLoginProps {
   onSuccess?: () => void;
@@ -27,20 +28,28 @@ export function AuthLogin({ onSuccess, redirectTo = '/dashboard' }: AuthLoginPro
     setIsLoading(true);
 
     try {
-      // TODO: Implement actual Supabase auth
-      // const { data, error } = await supabase.auth.signInWithPassword({
-      //   email,
-      //   password
-      // });
-
-      // Mock login for demo
-      setTimeout(() => {
+      const user = await signIn(email, password);
+      
+      if (user) {
+        console.log('Login successful, redirecting to:', redirectTo);
+        
+        // Call onSuccess callback if provided
+        if (onSuccess) {
+          onSuccess();
+        }
+        
+        // Small delay to ensure localStorage is set
+        await new Promise(resolve => setTimeout(resolve, 100));
+        
+        // Force a hard navigation to ensure page reload
+        window.location.href = redirectTo;
+      } else {
+        setError('Invalid email or password');
         setIsLoading(false);
-        if (onSuccess) onSuccess();
-        router.push(redirectTo);
-      }, 1000);
+      }
     } catch (err) {
-      setError('Invalid email or password');
+      console.error('Login error:', err);
+      setError('Invalid email or password. Please try again.');
       setIsLoading(false);
     }
   };
