@@ -13,9 +13,8 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "YourCoachAgent - Professional ICF Coaching",
-  description: "Mobile-first professional coaching aligned with International Coaching Federation standards. Transform your life with presence, awareness, and action.",
-  keywords: ["ICF coaching", "professional coaching", "mobile coaching", "personal development", "life coaching"],
+  title: "YourCoachAgent - Professional Coaching That Fits Your Life",
+  description: "AI-powered coaching sessions, human wisdom, real results. ICF-certified professional coaching for modern leaders.",
 };
 
 export default function RootLayout({

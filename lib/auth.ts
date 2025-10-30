@@ -1,42 +1,56 @@
-// Authentication for m_lowegrenmac.com full platform access
+// Authentication with Supabase
+import { signInWithEmail, signOutUser, getUserProfile } from './supabase';
 
 export interface User {
+  id: string;
   email: string;
   name: string;
   role: 'admin' | 'coach' | 'client';
   hasFullAccess: boolean;
 }
 
-// Temporary in-memory user store (replace with database in production)
-const USERS = new Map<string, { password: string; user: User }>();
-
-// Initialize admin user for m_lowegrenmac.com
-USERS.set('m_lowegrenmac.com', {
-  password: 'coach2024', // Change this to a secure password
-  user: {
-    email: 'm_lowegrenmac.com',
-    name: 'Mac Lowegren',
-    role: 'admin',
-    hasFullAccess: true,
-  },
-});
-
 export async function signIn(email: string, password: string): Promise<User | null> {
-  const userData = USERS.get(email);
-  
-  if (!userData) {
+  try {
+    // Sign in with Supabase
+    const { user: authUser } = await signInWithEmail(email, password);
+    
+    if (!authUser) {
+      return null;
+    }
+
+    // Get user profile from database
+    const profile = await getUserProfile(authUser.id);
+    
+    if (!profile) {
+      return null;
+    }
+
+    const user: User = {
+      id: profile.id,
+      email: profile.email,
+      name: profile.name,
+      role: profile.role,
+      hasFullAccess: profile.has_full_access,
+    };
+    
+    // Store in localStorage
+    setCurrentUser(user);
+    
+    return user;
+  } catch (error) {
+    console.error('Sign in error:', error);
     return null;
   }
-  
-  if (userData.password === password) {
-    return userData.user;
-  }
-  
-  return null;
 }
 
-export function signOut(): void {
-  // Clear session
+export async function signOut(): Promise<void> {
+  try {
+    await signOutUser();
+  } catch (error) {
+    console.error('Sign out error:', error);
+  }
+  
+  // Clear local storage
   if (typeof window !== 'undefined') {
     localStorage.removeItem('currentUser');
   }
@@ -68,4 +82,3 @@ export function setCurrentUser(user: User): void {
 export function hasFullAccess(user: User | null): boolean {
   return user?.hasFullAccess === true;
 }
-

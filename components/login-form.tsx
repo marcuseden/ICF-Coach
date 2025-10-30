@@ -109,7 +109,7 @@ export function LoginForm({ onSuccess }: LoginFormProps) {
               <p className="text-xs text-center text-muted-foreground">
                 Demo credentials:
                 <br />
-                Email: <code className="text-stone-900 dark:text-stone-100">m_lowegrenmac.com</code>
+                Email: <code className="text-stone-900 dark:text-stone-100">m_lowegren@mac.com</code>
                 <br />
                 Password: <code className="text-stone-900 dark:text-stone-100">coach2024</code>
               </p>

@@ -94,3 +94,80 @@ export const ICF_CORE_COMPETENCIES = [
 
 export type ICFCompetency = typeof ICF_CORE_COMPETENCIES[number];
 
+// ========================================
+// Add-On Types: ICF Coaching Sessions
+// ========================================
+
+export type CoachingMode = 'ai' | 'human';
+export type CommitmentStatus = 'active' | 'done' | 'dropped';
+
+export interface CoachingSession {
+  id: string;
+  user_id: string;
+  mode: CoachingMode;
+  focus_area: string | null;
+  summary: string | null;
+  commitment: string | null;
+  created_at: string;
+  ended_at: string | null;
+}
+
+export interface CoachingCommitment {
+  id: string;
+  user_id: string;
+  session_id: string | null;
+  text: string;
+  confidence: number | null; // 1-10 scale
+  due_date: string | null;
+  status: CommitmentStatus;
+  created_at: string;
+  updated_at: string;
+}
+
+export interface OrgTrend {
+  id: string;
+  org_id: string | null;
+  period_start: string;
+  period_end: string;
+  metric: string;
+  value: number | null;
+  sample_size: number | null;
+  created_at: string;
+}
+
+export interface SessionContext {
+  session_id: string;
+  coach_role: string;
+  coaching_mode: CoachingMode;
+  open_commitments: CoachingCommitment[];
+  recent_sessions: CoachingSession[];
+  suggested_opening_prompt: string;
+  icf_principles: string[];
+}
+
+export interface DashboardStats {
+  total_sessions: number;
+  completed_sessions: number;
+  ai_sessions: number;
+  human_sessions: number;
+  total_commitments: number;
+  active_commitments: number;
+  done_commitments: number;
+  average_confidence: number | null;
+}
+
+export interface RecentActivity {
+  type: 'session' | 'commitment';
+  id: string;
+  timestamp: string;
+  description: string;
+  status?: CommitmentStatus;
+}
+
+export interface DashboardData {
+  sessions: CoachingSession[];
+  commitments: CoachingCommitment[];
+  stats: DashboardStats;
+  recent_activity: RecentActivity[];
+}
+

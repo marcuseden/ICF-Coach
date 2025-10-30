@@ -1,0 +1,102 @@
+[
+  {
+    "category": "Getting Started",
+    "question": "How do I sign up for YourCoachAgent?",
+    "answer": "Signing up for YourCoachAgent is easy! Simply visit our website and click on the 'Sign Up' button. You'll be guided through a few steps to create your account, choose your desired package, and set up your payment information. Once completed, you'll have immediate access to our AI voice coaching and can schedule your first session with a human coach."
+  },
+  {
+    "category": "Getting Started",
+    "question": "What equipment do I need to use YourCoachAgent?",
+    "answer": "To use YourCoachAgent effectively, you'll need a smartphone or computer with internet access. For video calls, a device with a webcam and microphone is required. If you plan to integrate wearables, ensure you have an Apple Watch, Oura Ring, or WHOOP device."
+  },
+  {
+    "category": "Getting Started",
+    "question": "Can I try YourCoachAgent before committing to a package?",
+    "answer": "Yes! We offer a free one-week trial where you can experience our AI voice coaching and schedule a complimentary session with one of our ICF-certified coaches. This way, you can explore our platform and its features before making a commitment."
+  },
+  {
+    "category": "Coaching Sessions",
+    "question": "How are the coaching sessions structured?",
+    "answer": "All coaching sessions follow a 7-step ICF framework designed to maximize your growth and development. The structure includes establishing the session focus, exploring your current situation, identifying obstacles, brainstorming solutions, setting action plans, and committing to follow-up actions. This ensures a comprehensive and effective coaching experience."
+  },
+  {
+    "category": "Coaching Sessions",
+    "question": "How do I schedule a session with a human coach?",
+    "answer": "Once you have an active subscription, log into your YourCoachAgent account and navigate to the 'Schedule' section. Here, you can view available times for our ICF-certified coaches and book a session that fits your schedule. You’ll receive a confirmation email with all the details."
+  },
+  {
+    "category": "Coaching Sessions",
+    "question": "What happens if I miss a scheduled session?",
+    "answer": "If you miss a scheduled session, don't worry! You can reschedule by logging into your account and selecting a new time. We encourage you to notify your coach if you're unable to attend, as this helps maintain a respectful and productive relationship."
+  },
+  {
+    "category": "Coaching Sessions",
+    "question": "How do I track my progress on the platform?",
+    "answer": "YourCoachAgent offers a comprehensive progress tracking feature where you can view your achievements, review past sessions, and monitor your commitment. You'll also have access to confidence scoring, allowing you to self-assess and reflect on your growth journey."
+  },
+  {
+    "category": "AI Voice Coach",
+    "question": "What can the AI voice coach help me with?",
+    "answer": "Our AI voice coach, powered by ElevenLabs, is available 24/7 to provide guidance, answer your questions, and support you between human coaching sessions. It can help with setting goals, offering motivational advice, and suggesting exercises to enhance your personal development."
+  },
+  {
+    "category": "AI Voice Coach",
+    "question": "Is the AI voice coach customizable?",
+    "answer": "Absolutely! You can customize the AI voice coach interactions based on your preferences and goals. Over time, it learns from your interactions to provide more personalized support and recommendations tailored to your unique needs."
+  },
+  {
+    "category": "Human Coaching",
+    "question": "Who are the human coaches on YourCoachAgent?",
+    "answer": "All human coaches on YourCoachAgent are ICF-certified professionals with extensive experience in personal and professional development. They are dedicated to helping you achieve your goals through personalized coaching sessions, following the ICF framework."
+  },
+  {
+    "category": "Human Coaching",
+    "question": "Can I choose my human coach?",
+    "answer": "Yes, you can view profiles of our coaches, including their specialties and coaching styles, and select one that aligns with your preferences. If you'd like to switch coaches later, you can do so through your account settings."
+  },
+  {
+    "category": "Pricing & Billing",
+    "question": "What are the differences between the Basic, Standard, and Premium packages?",
+    "answer": "The Basic package ($400 for 4 weeks) includes access to the AI voice coach and 2 human coaching sessions. The Standard package ($750 for 8 weeks) offers the AI coach and 5 human sessions. The Premium package ($1,200 for 12 weeks) provides the AI coach and 8 human sessions, plus priority scheduling and additional resources."
+  },
+  {
+    "category": "Pricing & Billing",
+    "question": "How does billing work for YourCoachAgent?",
+    "answer": "Billing is straightforward. Once you select a package during signup, you'll be billed upfront for the duration of the package (4, 8, or 12 weeks). Payments are processed securely, and you can update your billing information at any time through your account."
+  },
+  {
+    "category": "Pricing & Billing",
+    "question": "Can I cancel or change my package?",
+    "answer": "Yes, you can cancel or change your package at any time. For changes, simply log into your account, navigate to the 'Subscriptions' section, and select a new package. Cancellation will take effect at the end of your current billing cycle."
+  },
+  {
+    "category": "Technical Support",
+    "question": "What should I do if I encounter technical issues?",
+    "answer": "If you experience technical issues, our support team is here to help! You can contact us through the 'Help' section of your account or email us directly at support@yourcoachagent.com. We aim to resolve all issues promptly to ensure a smooth experience."
+  },
+  {
+    "category": "Technical Support",
+    "question": "Are there tutorials available to help me use the platform?",
+    "answer": "Yes, we provide a range of tutorials and resources to help you navigate the platform. These are available in the 'Resources' section of your account. From setting up your profile to using voice AI, our guides are designed to help you make the most of YourCoachAgent."
+  },
+  {
+    "category": "Wearables Integration",
+    "question": "How do I integrate my wearables with the platform?",
+    "answer": "Integrating wearables is simple. Go to the 'Integrations' section of your account and select your wearable device (Apple Watch, Oura Ring, or WHOOP). Follow the on-screen instructions to connect your device, allowing you to track your physical and mental wellness seamlessly."
+  },
+  {
+    "category": "Wearables Integration",
+    "question": "What benefits do wearables integration offer?",
+    "answer": "By integrating wearables, you gain deeper insights into your physical activity, sleep patterns, and overall well-being. This data enriches your coaching sessions, helping you and your coach tailor strategies that align with your lifestyle and goals."
+  },
+  {
+    "category": "Privacy & Security",
+    "question": "How does YourCoachAgent protect my personal information?",
+    "answer": "YourCoachAgent takes your privacy seriously. We use state-of-the-art encryption and security protocols to protect your data. Your information is stored securely, and we do not share it with third parties without your explicit consent."
+  },
+  {
+    "category": "Privacy & Security",
+    "question": "Are my coaching sessions confidential?",
+    "answer": "Absolutely. Both AI and human coaching sessions are completely confidential. Human coaches adhere to ICF's strict confidentiality standards, and our AI systems are designed to protect your privacy. Your trust is paramount, and we ensure your information remains secure."
+  }
+]

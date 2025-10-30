@@ -30,8 +30,8 @@ export function VoiceCoachingSession({
   const [messages, setMessages] = useState<Message[]>([]);
   const [sessionId, setSessionId] = useState<string>();
   
-  const agentRef = useRef<ElevenLabsCoachAgent>();
-  const mediaRecorderRef = useRef<MediaRecorder>();
+  const agentRef = useRef<ElevenLabsCoachAgent | null>(null);
+  const mediaRecorderRef = useRef<MediaRecorder | null>(null);
   const audioChunksRef = useRef<Blob[]>([]);
 
   useEffect(() => {
