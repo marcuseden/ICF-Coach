@@ -92,10 +92,11 @@ export default function ReadingPage() {
                 <Card 
                   key={material.id}
                   className="cursor-pointer hover:shadow-md transition-shadow border-stone-200 bg-white overflow-hidden"
+                  onClick={() => router.push(`/reading/${material.id}`)}
                 >
                   <CardContent className="p-0">
                     <div className="flex gap-0">
-                      <div className="w-28 h-28 flex-shrink-0 overflow-hidden bg-stone-200">
+                      <div className="w-28 h-28 flex-shrink-0 overflow-hidden bg-stone-200 ml-4 my-4 rounded-lg">
                         <img 
                           src={material.image}
                           alt={material.title}
@@ -147,10 +148,11 @@ export default function ReadingPage() {
                 <Card 
                   key={material.id}
                   className="cursor-pointer hover:shadow-md transition-shadow border-stone-200 bg-white overflow-hidden"
+                  onClick={() => router.push(`/reading/${material.id}`)}
                 >
                   <CardContent className="p-0">
                     <div className="flex gap-0">
-                      <div className="w-28 h-28 flex-shrink-0 overflow-hidden bg-stone-200">
+                      <div className="w-28 h-28 flex-shrink-0 overflow-hidden bg-stone-200 ml-4 my-4 rounded-lg">
                         <img 
                           src={material.image}
                           alt={material.title}
@@ -187,6 +189,7 @@ export default function ReadingPage() {
                 <Card 
                   key={material.id}
                   className="cursor-pointer border-stone-200 bg-white overflow-hidden opacity-75"
+                  onClick={() => router.push(`/reading/${material.id}`)}
                 >
                   <CardContent className="p-0">
                     <div className="flex gap-0">
