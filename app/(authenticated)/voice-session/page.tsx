@@ -15,7 +15,7 @@ export default function VoiceSessionPage() {
   const aiCoach = {
     name: 'AI Coach',
     title: 'Din personliga coach',
-    image: 'https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?w=400&h=400&fit=crop&crop=faces'
+    image: 'https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?w=400&h=400&fit=crop&crop=faces'
   };
 
   useEffect(() => {
