@@ -129,15 +129,20 @@ export async function exportUserData(userId: string): Promise<{
   error?: string;
 }> {
   try {
-    // Fetch all user data from all tables
-    const [profile, client, sessions, checkIns, questionnaires, readingProgress, consents] = await Promise.all([
+    // First fetch profile, client, and consents
+    const [profile, client, consents] = await Promise.all([
       supabase.from('profiles').select('*').eq('id', userId).single(),
       supabase.from('clients').select('*').eq('user_id', userId).maybeSingle(),
-      supabase.from('sessions').select('*').eq('client_id', client?.data?.id || ''),
-      supabase.from('check_ins').select('*').eq('client_id', client?.data?.id || ''),
-      supabase.from('questionnaire_responses').select('*').eq('client_id', client?.data?.id || ''),
-      supabase.from('reading_progress').select('*').eq('client_id', client?.data?.id || ''),
       supabase.from('user_consents').select('*').eq('user_id', userId),
+    ]);
+
+    // Then fetch related data using client ID
+    const clientId = client?.data?.id || '';
+    const [sessions, checkIns, questionnaires, readingProgress] = await Promise.all([
+      supabase.from('sessions').select('*').eq('client_id', clientId),
+      supabase.from('check_ins').select('*').eq('client_id', clientId),
+      supabase.from('questionnaire_responses').select('*').eq('client_id', clientId),
+      supabase.from('reading_progress').select('*').eq('client_id', clientId),
     ]);
 
     // Compile all data into GDPR-compliant export format
@@ -396,8 +401,8 @@ export function checkLawfulBasis(
  */
 export async function logSecurityIncident(
   description: string,
-  affectedUsers?: string[],
-  severity: 'low' | 'medium' | 'high' | 'critical'
+  severity: 'low' | 'medium' | 'high' | 'critical',
+  affectedUsers?: string[]
 ): Promise<{ success: boolean; error?: string }> {
   try {
     await supabase.from('security_incidents').insert({

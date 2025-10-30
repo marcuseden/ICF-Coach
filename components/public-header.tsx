@@ -3,19 +3,10 @@
 import { useState } from 'react';
 import { useRouter } from 'next/navigation';
 import { Button } from './ui/button';
-import {
-  Dialog,
-  DialogContent,
-  DialogDescription,
-  DialogHeader,
-  DialogTitle,
-} from './ui/dialog';
-import { AuthLogin } from './auth-login';
 import { Menu, X } from 'lucide-react';
 
 export function PublicHeader() {
   const router = useRouter();
-  const [showLoginModal, setShowLoginModal] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
   const navigation = [
@@ -57,7 +48,7 @@ export function PublicHeader() {
             {/* Desktop Auth Buttons */}
             <div className="hidden md:flex items-center space-x-3">
               <button
-                onClick={() => setShowLoginModal(true)}
+                onClick={() => router.push('/login')}
                 className="px-4 py-1.5 text-sm text-white hover:text-white/80 transition-colors"
               >
                 Log In
@@ -73,7 +64,7 @@ export function PublicHeader() {
             {/* Mobile Auth & Menu */}
             <div className="md:hidden flex items-center gap-3">
               <button
-                onClick={() => setShowLoginModal(true)}
+                onClick={() => router.push('/login')}
                 className="text-sm text-white/90 hover:text-white font-medium"
               >
                 Log In
@@ -123,22 +114,6 @@ export function PublicHeader() {
           )}
         </nav>
       </header>
-
-      {/* Login Modal */}
-      <Dialog open={showLoginModal} onOpenChange={setShowLoginModal}>
-        <DialogContent className="sm:max-w-md p-0 gap-0">
-          <DialogHeader className="sr-only">
-            <DialogTitle>Log In</DialogTitle>
-            <DialogDescription>Sign in to your account</DialogDescription>
-          </DialogHeader>
-          <AuthLogin 
-            onSuccess={() => {
-              setShowLoginModal(false);
-              router.push('/dashboard');
-            }}
-          />
-        </DialogContent>
-      </Dialog>
     </>
   );
 }

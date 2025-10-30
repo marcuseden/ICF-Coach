@@ -12,7 +12,9 @@
     "lint": "eslint",
     "type-check": "tsc --noEmit",
     "format": "prettier --write \"**/*.{ts,tsx,js,jsx,json,css,md}\"",
-    "preview": "next build && next start"
+    "preview": "next build && next start",
+    "verify-env": "node scripts/verify-env.js",
+    "setup-check": "node scripts/verify-env.js && echo '\n✅ Environment ready! Run: npm run dev'"
   },
   "dependencies": {
     "@radix-ui/react-avatar": "^1.1.10",

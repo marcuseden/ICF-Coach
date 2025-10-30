@@ -48,6 +48,11 @@ export class ElevenLabsCoachAgent {
 
     const data = await response.json();
     this.sessionId = data.conversation_id;
+    
+    if (!this.sessionId) {
+      throw new Error('No conversation ID returned from API');
+    }
+    
     return this.sessionId;
   }
 
