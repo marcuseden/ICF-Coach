@@ -3,7 +3,7 @@
 import { useEffect, useState } from 'react';
 import { useRouter } from 'next/navigation';
 import { getCurrentUser } from '@/lib/auth';
-import { iPhoneCallUI } from '@/components/iphone-call-ui';
+import { IPhoneCallUI } from '@/components/iphone-call-ui';
 
 export default function VoiceSessionPage() {
   const router = useRouter();
@@ -69,7 +69,7 @@ export default function VoiceSessionPage() {
   }
 
   return (
-    <iPhoneCallUI
+    <IPhoneCallUI
       coachName={aiCoach.name}
       coachImage={aiCoach.image}
       coachTitle={aiCoach.title}

@@ -4,7 +4,7 @@ import { useState, useEffect } from 'react';
 import { Button } from '@/components/ui/button';
 import { Phone, Mic, MicOff } from 'lucide-react';
 
-interface iPhoneCallUIProps {
+interface IPhoneCallUIProps {
   coachName: string;
   coachImage: string;
   coachTitle?: string;
@@ -12,13 +12,13 @@ interface iPhoneCallUIProps {
   isConnecting?: boolean;
 }
 
-export function iPhoneCallUI({ 
+export function IPhoneCallUI({ 
   coachName, 
   coachImage, 
   coachTitle = 'AI Coach',
   onEndCall,
   isConnecting = false
-}: iPhoneCallUIProps) {
+}: IPhoneCallUIProps) {
   const [muted, setMuted] = useState(false);
   const [callDuration, setCallDuration] = useState(0);
   const [isConnected, setIsConnected] = useState(false);
