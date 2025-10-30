@@ -3,10 +3,9 @@
 import { useState, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
 import { getCurrentUser } from '@/lib/auth';
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
-import { Button } from '@/components/ui/button';
-import { Badge } from '@/components/ui/badge';
-import { BookOpen, Clock, CheckCircle2 } from 'lucide-react';
+import { Card, CardContent } from '@/components/ui/card';
+import { AppFooter } from '@/components/app-footer';
+import { AppHeader } from '@/components/app-header';
 
 export default function ReadingPage() {
   const router = useRouter();
@@ -23,137 +22,155 @@ export default function ReadingPage() {
     }
   }, [router]);
 
-  // Mock reading materials
-  const materials = [
-    {
-      id: '1',
-      title: 'The Leadership Challenge',
-      description: 'Essential principles for inspiring action and achieving extraordinary results',
-      duration: '15 min read',
-      completed: true,
-      category: 'Leadership'
-    },
-    {
-      id: '2',
-      title: 'Active Listening Techniques',
-      description: 'Master the art of truly hearing what your team is saying',
-      duration: '10 min read',
-      completed: true,
-      category: 'Communication'
-    },
-    {
-      id: '3',
-      title: 'Managing Remote Teams',
-      description: 'Build trust and productivity across distributed teams',
-      duration: '12 min read',
-      completed: false,
-      category: 'Remote Work'
-    },
-    {
-      id: '4',
-      title: 'Difficult Conversations Framework',
-      description: 'Navigate challenging discussions with confidence and clarity',
-      duration: '18 min read',
-      completed: false,
-      category: 'Communication'
-    },
-    {
-      id: '5',
-      title: 'Building Psychological Safety',
-      description: 'Create environments where teams thrive and innovate',
-      duration: '14 min read',
-      completed: false,
-      category: 'Culture'
-    },
-    {
-      id: '6',
-      title: 'Delegation Mastery',
-      description: 'Empower your team while maintaining accountability',
-      duration: '11 min read',
-      completed: false,
-      category: 'Leadership'
-    }
-  ];
-
-  const completed = materials.filter(m => m.completed);
-  const toRead = materials.filter(m => !m.completed);
-
   if (loading) {
     return (
-      <div className="min-h-screen flex items-center justify-center bg-stone-50 pt-14">
-        <p className="text-stone-600">Loading...</p>
+      <div className="min-h-screen flex items-center justify-center bg-stone-50">
+        <p className="text-stone-600">Laddar...</p>
       </div>
     );
   }
 
+  const readingMaterials = [
+    {
+      id: '1',
+      title: 'Hantera fjärrteam effektivt',
+      description: 'Lär dig strategier för att leda distribuerade team',
+      category: 'Ledarskap',
+      readTime: '12 min',
+      progress: 45,
+      image: 'https://images.unsplash.com/photo-1522071820081-009f0129c71c?w=400&h=300&fit=crop'
+    },
+    {
+      id: '2',
+      title: 'Kraftfulla coachingfrågor',
+      description: 'En guide till att ställa frågor som skapar insikt',
+      category: 'Coaching',
+      readTime: '8 min',
+      progress: 0,
+      image: 'https://images.unsplash.com/photo-1517245386807-bb43f82c33c4?w=400&h=300&fit=crop'
+    },
+    {
+      id: '3',
+      title: 'Bygga psykologisk trygghet',
+      description: 'Skapa en miljö där teamet vågar ta risker',
+      category: 'Teamutveckling',
+      readTime: '15 min',
+      progress: 100,
+      image: 'https://images.unsplash.com/photo-1556761175-b413da4baf72?w=400&h=300&fit=crop'
+    },
+    {
+      id: '4',
+      title: 'Feedback som förändrar',
+      description: 'Konsten att ge konstruktiv återkoppling',
+      category: 'Kommunikation',
+      readTime: '10 min',
+      progress: 0,
+      image: 'https://images.unsplash.com/photo-1552664730-d307ca884978?w=400&h=300&fit=crop'
+    }
+  ];
+
+  const inProgress = readingMaterials.filter(m => m.progress > 0 && m.progress < 100);
+  const notStarted = readingMaterials.filter(m => m.progress === 0);
+  const completed = readingMaterials.filter(m => m.progress === 100);
+
   return (
-    <div className="min-h-screen bg-stone-50 pt-14 pb-20">
-      {/* Header */}
-      <div className="bg-white border-b border-stone-200 px-4 py-6">
-        <div className="max-w-2xl mx-auto">
-          <Button 
-            variant="ghost" 
-            size="sm" 
-            onClick={() => router.back()}
-            className="mb-2"
-          >
-            ← Back
-          </Button>
-          <h1 className="text-3xl font-bold text-stone-900">Reading Library</h1>
-          <p className="text-stone-600 mt-1">
-            Curated materials to support your growth
-          </p>
-        </div>
-      </div>
+    <div className="min-h-screen bg-stone-50">
+      <AppHeader 
+        title="Läsmaterial"
+        subtitle="Fördjupa dina kunskaper"
+        showBack
+      />
 
-      {/* Progress */}
-      <div className="max-w-2xl mx-auto px-4 py-6">
-        <Card className="mb-6">
-          <CardContent className="pt-6">
-            <div className="flex items-center justify-between mb-2">
-              <span className="text-sm font-medium text-stone-900">Your Progress</span>
-              <span className="text-sm text-stone-600">{completed.length} of {materials.length} completed</span>
-            </div>
-            <div className="w-full bg-stone-200 rounded-full h-2">
-              <div 
-                className="bg-stone-900 h-2 rounded-full transition-all"
-                style={{ width: `${(completed.length / materials.length) * 100}%` }}
-              />
-            </div>
-          </CardContent>
-        </Card>
-
-        {/* To Read */}
-        {toRead.length > 0 && (
-          <div className="mb-8">
-            <h2 className="text-xl font-bold text-stone-900 mb-4">To Read</h2>
+      <div className="max-w-2xl mx-auto px-4 py-6 pb-24 space-y-6">
+        
+        {/* Continue Reading */}
+        {inProgress.length > 0 && (
+          <div>
+            <h2 className="text-base font-semibold text-stone-900 mb-3 px-1">Fortsätt läsa</h2>
             <div className="space-y-3">
-              {toRead.map((material) => (
-                <Card key={material.id} className="hover:border-stone-400 transition-colors cursor-pointer">
-                  <CardContent className="pt-6">
-                    <div className="flex items-start gap-3">
-                      <div className="w-12 h-12 rounded-xl bg-stone-100 flex items-center justify-center flex-shrink-0">
-                        <BookOpen className="h-6 w-6 text-stone-900" />
+              {inProgress.map((material) => (
+                <Card 
+                  key={material.id}
+                  className="cursor-pointer hover:shadow-md transition-shadow border-stone-200 bg-white overflow-hidden"
+                >
+                  <CardContent className="p-0">
+                    <div className="flex gap-0">
+                      <div className="w-28 h-28 flex-shrink-0 overflow-hidden bg-stone-200">
+                        <img 
+                          src={material.image}
+                          alt={material.title}
+                          className="w-full h-full object-cover"
+                        />
                       </div>
-                      <div className="flex-1">
-                        <Badge className="bg-stone-100 text-stone-700 border-stone-200 mb-2">
-                          {material.category}
-                        </Badge>
-                        <h3 className="text-lg font-semibold text-stone-900 mb-1">
-                          {material.title}
-                        </h3>
-                        <p className="text-sm text-stone-600 mb-3">
-                          {material.description}
-                        </p>
-                        <div className="flex items-center gap-2 text-xs text-stone-500">
-                          <Clock className="h-3 w-3" />
-                          {material.duration}
+                      <div className="flex-1 p-4">
+                        <div className="flex items-start justify-between mb-2">
+                          <div className="flex-1">
+                            <h3 className="font-semibold text-base text-stone-900 mb-1 line-clamp-2">
+                              {material.title}
+                            </h3>
+                            <p className="text-xs text-stone-600 mb-2">{material.description}</p>
+                          </div>
+                        </div>
+                        <div className="space-y-2">
+                          <div className="flex items-center gap-3 text-xs text-stone-600">
+                            <span className="px-2 py-0.5 bg-purple-50 text-purple-700 rounded-full">
+                              {material.category}
+                            </span>
+                            <span>•</span>
+                            <span>{material.readTime}</span>
+                          </div>
+                          <div className="flex items-center gap-2">
+                            <div className="flex-1 h-1.5 bg-stone-100 rounded-full overflow-hidden">
+                              <div 
+                                className="h-full bg-purple-600 rounded-full"
+                                style={{ width: `${material.progress}%` }}
+                              />
+                            </div>
+                            <span className="text-xs text-purple-600 font-semibold">{material.progress}%</span>
+                          </div>
                         </div>
                       </div>
                     </div>
-                    <Button className="w-full mt-4">
-                      Start Reading
-                    </Button>
+                  </CardContent>
+                </Card>
+              ))}
+            </div>
+          </div>
+        )}
+
+        {/* Recommended */}
+        {notStarted.length > 0 && (
+          <div>
+            <h2 className="text-base font-semibold text-stone-900 mb-3 px-1">Rekommenderat</h2>
+            <div className="space-y-3">
+              {notStarted.map((material) => (
+                <Card 
+                  key={material.id}
+                  className="cursor-pointer hover:shadow-md transition-shadow border-stone-200 bg-white overflow-hidden"
+                >
+                  <CardContent className="p-0">
+                    <div className="flex gap-0">
+                      <div className="w-28 h-28 flex-shrink-0 overflow-hidden bg-stone-200">
+                        <img 
+                          src={material.image}
+                          alt={material.title}
+                          className="w-full h-full object-cover"
+                        />
+                      </div>
+                      <div className="flex-1 p-4">
+                        <h3 className="font-semibold text-base text-stone-900 mb-1 line-clamp-2">
+                          {material.title}
+                        </h3>
+                        <p className="text-xs text-stone-600 mb-3">{material.description}</p>
+                        <div className="flex items-center gap-3 text-xs text-stone-600">
+                          <span className="px-2 py-0.5 bg-stone-100 text-stone-700 rounded-full">
+                            {material.category}
+                          </span>
+                          <span>•</span>
+                          <span>{material.readTime}</span>
+                        </div>
+                      </div>
+                    </div>
                   </CardContent>
                 </Card>
               ))}
@@ -164,20 +181,41 @@ export default function ReadingPage() {
         {/* Completed */}
         {completed.length > 0 && (
           <div>
-            <h2 className="text-xl font-bold text-stone-900 mb-4">Completed</h2>
+            <h2 className="text-base font-semibold text-stone-900 mb-3 px-1">Genomförda</h2>
             <div className="space-y-3">
               {completed.map((material) => (
-                <Card key={material.id} className="bg-stone-50 border-stone-200">
-                  <CardContent className="pt-4 pb-4">
-                    <div className="flex items-start gap-3">
-                      <CheckCircle2 className="h-5 w-5 text-stone-600 flex-shrink-0 mt-0.5" />
-                      <div className="flex-1">
-                        <h3 className="text-sm font-medium text-stone-700">
+                <Card 
+                  key={material.id}
+                  className="cursor-pointer border-stone-200 bg-white overflow-hidden opacity-75"
+                >
+                  <CardContent className="p-0">
+                    <div className="flex gap-0">
+                      <div className="w-28 h-28 flex-shrink-0 overflow-hidden bg-stone-200 relative">
+                        <img 
+                          src={material.image}
+                          alt={material.title}
+                          className="w-full h-full object-cover"
+                        />
+                        <div className="absolute inset-0 bg-green-500/20 flex items-center justify-center">
+                          <div className="w-8 h-8 rounded-full bg-green-500 flex items-center justify-center">
+                            <svg className="w-5 h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
+                            </svg>
+                          </div>
+                        </div>
+                      </div>
+                      <div className="flex-1 p-4">
+                        <h3 className="font-semibold text-base text-stone-900 mb-1 line-clamp-2">
                           {material.title}
                         </h3>
-                        <p className="text-xs text-stone-500 mt-1">
-                          {material.category} • {material.duration}
-                        </p>
+                        <p className="text-xs text-stone-600 mb-3">{material.description}</p>
+                        <div className="flex items-center gap-3 text-xs text-stone-600">
+                          <span className="px-2 py-0.5 bg-stone-100 text-stone-700 rounded-full">
+                            {material.category}
+                          </span>
+                          <span>•</span>
+                          <span>{material.readTime}</span>
+                        </div>
                       </div>
                     </div>
                   </CardContent>
@@ -187,7 +225,8 @@ export default function ReadingPage() {
           </div>
         )}
       </div>
+
+      <AppFooter />
     </div>
   );
 }
-

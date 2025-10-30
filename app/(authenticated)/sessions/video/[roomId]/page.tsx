@@ -2,14 +2,16 @@
 
 import { useEffect, useState } from 'react';
 import { useRouter, useParams } from 'next/navigation';
-import { VideoCall } from '@/components/video-call';
+import { FaceTimeCall } from '@/components/facetime-call';
 import { getCurrentUser } from '@/lib/auth';
+import { getRandomCoach } from '@/lib/coach-data';
 
 export default function VideoSessionPage() {
   const router = useRouter();
   const params = useParams();
   const roomId = params.roomId as string;
   const [userName, setUserName] = useState('User');
+  const [coach] = useState(() => getRandomCoach());
 
   useEffect(() => {
     const user = getCurrentUser();
@@ -25,9 +27,9 @@ export default function VideoSessionPage() {
   };
 
   return (
-    <VideoCall 
-      roomName={roomId}
-      userName={userName}
+    <FaceTimeCall 
+      coachName={coach.name}
+      coachImage={coach.image}
       onEndCall={handleEndCall}
     />
   );

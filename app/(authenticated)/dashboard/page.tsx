@@ -4,8 +4,8 @@ import { useState, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
 import { getCurrentUser } from '@/lib/auth';
 import { Card, CardContent } from '@/components/ui/card';
-import { Button } from '@/components/ui/button';
-import { MessageCircle, Mic, Target, BookOpen, Calendar, Zap } from 'lucide-react';
+import { AppFooter } from '@/components/app-footer';
+import { AppHeader } from '@/components/app-header';
 
 export default function DashboardPage() {
   const router = useRouter();
@@ -25,142 +25,138 @@ export default function DashboardPage() {
   if (loading) {
     return (
       <div className="min-h-screen flex items-center justify-center bg-stone-50">
-        <p className="text-stone-600">Loading...</p>
+        <p className="text-stone-600">Laddar...</p>
       </div>
     );
   }
 
   return (
-    <div className="min-h-screen bg-stone-50 pb-20">
-      {/* Welcome Section */}
-      <div className="bg-white border-b border-stone-200 px-4 py-6">
-        <div className="max-w-2xl mx-auto">
-          <h1 className="text-2xl font-bold text-stone-900">
-            Welcome back, {user?.name || 'there'}! 👋
-          </h1>
-          <p className="text-stone-600 mt-1">
-            Ready to continue your coaching journey?
-          </p>
-        </div>
-      </div>
+    <div className="min-h-screen bg-stone-50">
+      <AppHeader 
+        title={`Hej ${user?.name || 'där'}!`}
+        subtitle="Välkommen tillbaka"
+      />
 
-      {/* Main Content */}
-      <div className="max-w-2xl mx-auto px-4 py-6 space-y-6">
+      <div className="max-w-2xl mx-auto px-4 py-6 pb-24 space-y-4">
         
-        {/* Quick Actions */}
-        <div>
-          <h2 className="text-lg font-semibold text-stone-900 mb-3">Quick Actions</h2>
-          <div className="grid grid-cols-2 gap-3">
-            <Card 
-              className="cursor-pointer hover:border-stone-400 transition-colors"
-              onClick={() => router.push('/voice-session')}
-            >
-              <CardContent className="pt-6 pb-4 text-center">
-                <div className="w-12 h-12 rounded-full bg-stone-100 flex items-center justify-center mx-auto mb-3">
-                  <Mic className="h-6 w-6 text-stone-900" />
+        {/* Quick Action Card */}
+        <Card 
+          className="cursor-pointer hover:shadow-md transition-shadow border-stone-200 bg-white"
+          onClick={() => router.push('/voice-session')}
+        >
+          <CardContent className="pt-6 pb-6">
+            <div className="flex items-center gap-4">
+              <div className="w-16 h-16 rounded-full bg-purple-50 flex items-center justify-center flex-shrink-0">
+                <svg className="w-8 h-8 text-purple-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 11a7 7 0 01-7 7m0 0a7 7 0 01-7-7m7 7v4m0 0H8m4 0h4m-4-8a3 3 0 01-3-3V5a3 3 0 116 0v6a3 3 0 01-3 3z" />
+                </svg>
+              </div>
+              <div className="flex-1">
+                <h3 className="font-semibold text-lg text-stone-900 mb-1">Prata med din coach</h3>
+                <p className="text-sm text-stone-600">Starta ett röstsamtal med din AI-coach</p>
+              </div>
+              <svg className="w-5 h-5 text-stone-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+              </svg>
+            </div>
+          </CardContent>
+        </Card>
+
+        {/* Upcoming Sessions */}
+        <Card 
+          className="cursor-pointer hover:shadow-md transition-shadow border-stone-200 bg-white"
+          onClick={() => router.push('/sessions/upcoming')}
+        >
+          <CardContent className="pt-6 pb-6">
+            <div className="flex items-start justify-between">
+              <div className="flex-1">
+                <h3 className="font-semibold text-base text-stone-900 mb-3">Kommande sessioner</h3>
+                <div className="space-y-2">
+                  <div className="flex items-center gap-3">
+                    <div className="w-2 h-2 rounded-full bg-purple-600"></div>
+                    <span className="text-sm text-stone-700">Nästa session: Tisdag 14:00</span>
+                  </div>
+                  <div className="flex items-center gap-3">
+                    <div className="w-2 h-2 rounded-full bg-stone-300"></div>
+                    <span className="text-sm text-stone-600">1 bokad session</span>
+                  </div>
                 </div>
-                <p className="font-semibold text-sm">Talk to AI Coach</p>
-                <p className="text-xs text-stone-600 mt-1">Voice session</p>
+              </div>
+              <svg className="w-5 h-5 text-stone-400 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+              </svg>
+            </div>
+          </CardContent>
+        </Card>
+
+        {/* Progress Section */}
+        <div>
+          <h2 className="text-lg font-semibold text-stone-900 mb-3 px-1">Din progress</h2>
+          <div className="grid grid-cols-3 gap-3">
+            <Card className="border-stone-200 bg-white">
+              <CardContent className="pt-5 pb-5 text-center">
+                <p className="text-3xl font-bold text-stone-900 mb-1">4</p>
+                <p className="text-xs text-stone-600">Sessioner</p>
               </CardContent>
             </Card>
-
-            <Card 
-              className="cursor-pointer hover:border-stone-400 transition-colors"
-              onClick={() => router.push('/sessions/book')}
-            >
-              <CardContent className="pt-6 pb-4 text-center">
-                <div className="w-12 h-12 rounded-full bg-stone-100 flex items-center justify-center mx-auto mb-3">
-                  <Calendar className="h-6 w-6 text-stone-900" />
-                </div>
-                <p className="font-semibold text-sm">Book Human Coach</p>
-                <p className="text-xs text-stone-600 mt-1">Video or phone</p>
+            <Card className="border-stone-200 bg-white">
+              <CardContent className="pt-5 pb-5 text-center">
+                <p className="text-3xl font-bold text-stone-900 mb-1">2</p>
+                <p className="text-xs text-stone-600">Aktiva mål</p>
+              </CardContent>
+            </Card>
+            <Card className="border-stone-200 bg-white">
+              <CardContent className="pt-5 pb-5 text-center">
+                <p className="text-3xl font-bold text-stone-900 mb-1">8.5</p>
+                <p className="text-xs text-stone-600">Förtroende</p>
               </CardContent>
             </Card>
           </div>
-
-          {/* Upcoming Sessions Quick Link */}
-          <Card 
-            className="cursor-pointer hover:border-stone-400 transition-colors"
-            onClick={() => router.push('/sessions/upcoming')}
-          >
-            <CardContent className="pt-4 pb-4">
-              <div className="flex items-center gap-3">
-                <div className="w-10 h-10 rounded-full bg-stone-100 flex items-center justify-center flex-shrink-0">
-                  <Calendar className="h-5 w-5 text-stone-900" />
-                </div>
-                <div className="flex-1">
-                  <p className="font-semibold text-sm">Upcoming Sessions</p>
-                  <p className="text-xs text-stone-600">2 sessions scheduled</p>
-                </div>
-              </div>
-            </CardContent>
-          </Card>
         </div>
 
         {/* Today's Focus */}
-        <Card>
+        <Card className="border-stone-200 bg-white">
           <CardContent className="pt-6 pb-6">
-            <div className="flex items-start gap-3">
-              <div className="w-10 h-10 rounded-full bg-stone-100 flex items-center justify-center flex-shrink-0">
-                <Target className="h-5 w-5 text-stone-900" />
-              </div>
-              <div className="flex-1">
-                <h3 className="font-semibold text-sm text-stone-900 mb-1">Today's Focus</h3>
-                <p className="text-sm text-stone-700 mb-3">
-                  Continue building trust with your team through 1-on-1 conversations
-                </p>
-                <Button size="sm" variant="outline" onClick={() => router.push('/commitments')}>
-                  View Commitments
-                </Button>
-              </div>
+            <h3 className="font-semibold text-base text-stone-900 mb-3">Dagens fokus</h3>
+            <p className="text-sm text-stone-700 leading-relaxed mb-4">
+              Fortsätt bygga förtroende med ditt team genom individuella samtal. Ta dig tid att verkligen lyssna och ställa öppna frågor.
+            </p>
+            <div className="flex items-center gap-2 text-sm text-purple-600 font-medium">
+              <span>Visa åtaganden</span>
+              <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+              </svg>
             </div>
           </CardContent>
         </Card>
 
         {/* Continue Learning */}
-        <Card>
+        <Card 
+          className="cursor-pointer hover:shadow-md transition-shadow border-stone-200 bg-white"
+          onClick={() => router.push('/reading')}
+        >
           <CardContent className="pt-6 pb-6">
-            <div className="flex items-start gap-3">
-              <div className="w-10 h-10 rounded-full bg-stone-100 flex items-center justify-center flex-shrink-0">
-                <BookOpen className="h-5 w-5 text-stone-900" />
+            <div className="flex items-start gap-4">
+              <div className="w-12 h-12 rounded-lg bg-stone-100 flex items-center justify-center flex-shrink-0">
+                <svg className="w-6 h-6 text-stone-700" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253" />
+                </svg>
               </div>
               <div className="flex-1">
-                <h3 className="font-semibold text-sm text-stone-900 mb-1">Continue Reading</h3>
-                <p className="text-sm text-stone-700 mb-3">
-                  Managing Remote Teams • 12 min read
-                </p>
-                <Button size="sm" variant="outline" onClick={() => router.push('/reading')}>
-                  Start Reading
-                </Button>
+                <h3 className="font-semibold text-base text-stone-900 mb-1">Fortsätt läsa</h3>
+                <p className="text-sm text-stone-600">Hantera fjärrteam effektivt</p>
+                <p className="text-xs text-stone-500 mt-1">12 min läsning</p>
               </div>
+              <svg className="w-5 h-5 text-stone-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+              </svg>
             </div>
           </CardContent>
         </Card>
 
-        {/* Stats Overview */}
-        <div className="grid grid-cols-3 gap-3">
-          <Card>
-            <CardContent className="pt-4 pb-4 text-center">
-              <p className="text-2xl font-bold text-stone-900">4</p>
-              <p className="text-xs text-stone-600 mt-1">Sessions</p>
-            </CardContent>
-          </Card>
-          <Card>
-            <CardContent className="pt-4 pb-4 text-center">
-              <p className="text-2xl font-bold text-stone-900">2</p>
-              <p className="text-xs text-stone-600 mt-1">Active Goals</p>
-            </CardContent>
-          </Card>
-          <Card>
-            <CardContent className="pt-4 pb-4 text-center">
-              <p className="text-2xl font-bold text-stone-900">8.5</p>
-              <p className="text-xs text-stone-600 mt-1">Avg Confidence</p>
-            </CardContent>
-          </Card>
-        </div>
-
       </div>
+
+      <AppFooter />
     </div>
   );
 }
-

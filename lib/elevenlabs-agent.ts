@@ -1,7 +1,19 @@
 // ElevenLabs Conversational AI Agent Integration
 
-export const ELEVENLABS_API_KEY = 'sk_df90556ebec37bbcd61e3f2c06fb058bbcb625f2b54c9ed0';
-export const AGENT_ID = 'agent_8401k8tmvpwpfak9f6c3x6g4zgzv';
+// Get API keys from environment variables
+const getElevenLabsConfig = () => {
+  const apiKey = process.env.NEXT_PUBLIC_ELEVENLABS_API_KEY || process.env.ELEVENLABS_API_KEY;
+  const agentId = process.env.NEXT_PUBLIC_ELEVENLABS_AGENT_ID || process.env.ELEVENLABS_AGENT_ID;
+
+  if (!apiKey || !agentId) {
+    console.error('ElevenLabs configuration missing:', {
+      hasApiKey: !!apiKey,
+      hasAgentId: !!agentId,
+    });
+  }
+
+  return { apiKey, agentId };
+};
 
 export interface ConversationConfig {
   agentId?: string;
@@ -21,39 +33,55 @@ export class ElevenLabsCoachAgent {
   private sessionId?: string;
   private ws?: WebSocket;
 
-  constructor(agentId: string = AGENT_ID, apiKey: string = ELEVENLABS_API_KEY) {
-    this.apiKey = apiKey;
-    this.agentId = agentId;
+  constructor(agentId?: string, apiKey?: string) {
+    const config = getElevenLabsConfig();
+    this.apiKey = apiKey || config.apiKey || '';
+    this.agentId = agentId || config.agentId || '';
+
+    if (!this.apiKey || !this.agentId) {
+      throw new Error('ElevenLabs API key and Agent ID are required');
+    }
   }
 
   // Initialize conversation with the agent
   async startConversation(): Promise<string> {
-    const response = await fetch(
-      `https://api.elevenlabs.io/v1/convai/conversation`,
-      {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-          'xi-api-key': this.apiKey,
-        },
-        body: JSON.stringify({
-          agent_id: this.agentId,
-        }),
+    try {
+      console.log('🔌 Starting ElevenLabs conversation...');
+      console.log('Agent ID:', this.agentId?.substring(0, 20) + '...');
+      
+      const response = await fetch(
+        `https://api.elevenlabs.io/v1/convai/conversation`,
+        {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+            'xi-api-key': this.apiKey,
+          },
+          body: JSON.stringify({
+            agent_id: this.agentId,
+          }),
+        }
+      );
+
+      if (!response.ok) {
+        const errorText = await response.text();
+        console.error('ElevenLabs API Error:', errorText);
+        throw new Error(`Failed to start conversation: ${response.status} ${response.statusText} - ${errorText}`);
       }
-    );
 
-    if (!response.ok) {
-      throw new Error(`Failed to start conversation: ${response.statusText}`);
+      const data = await response.json();
+      this.sessionId = data.conversation_id;
+      
+      if (!this.sessionId) {
+        throw new Error('No conversation ID returned from API');
+      }
+      
+      console.log('✅ Conversation started:', this.sessionId.substring(0, 20) + '...');
+      return this.sessionId;
+    } catch (error) {
+      console.error('❌ Failed to start ElevenLabs conversation:', error);
+      throw error;
     }
-
-    const data = await response.json();
-    this.sessionId = data.conversation_id;
-    
-    if (!this.sessionId) {
-      throw new Error('No conversation ID returned from API');
-    }
-    
-    return this.sessionId;
   }
 
   // Connect to WebSocket for real-time voice conversation
@@ -67,32 +95,40 @@ export class ElevenLabsCoachAgent {
 
     const wsUrl = `wss://api.elevenlabs.io/v1/convai/conversation?agent_id=${this.agentId}&conversation_id=${this.sessionId}`;
     
+    console.log('🔌 Connecting to WebSocket...');
+    
     this.ws = new WebSocket(wsUrl);
     this.ws.binaryType = 'arraybuffer';
 
     this.ws.onopen = () => {
-      console.log('✅ Connected to ElevenLabs agent');
+      console.log('✅ Connected to ElevenLabs agent via WebSocket');
     };
 
     this.ws.onmessage = (event) => {
       if (typeof event.data === 'string') {
-        const data = JSON.parse(event.data);
-        if (data.type === 'agent_response') {
-          onMessage(data.content);
+        try {
+          const data = JSON.parse(event.data);
+          console.log('📨 Received message:', data);
+          if (data.type === 'agent_response' || data.message) {
+            onMessage(data.content || data.message || data.text);
+          }
+        } catch (e) {
+          console.error('Failed to parse WebSocket message:', e);
         }
       } else {
         // Audio data (ArrayBuffer)
+        console.log('🔊 Received audio data:', event.data.byteLength, 'bytes');
         onMessage('', event.data);
       }
     };
 
     this.ws.onerror = (error) => {
-      console.error('WebSocket error:', error);
+      console.error('❌ WebSocket error:', error);
       if (onError) onError(new Error('WebSocket connection failed'));
     };
 
-    this.ws.onclose = () => {
-      console.log('WebSocket connection closed');
+    this.ws.onclose = (event) => {
+      console.log('🔌 WebSocket connection closed:', event.code, event.reason);
     };
   }
 

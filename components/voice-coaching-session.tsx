@@ -35,10 +35,18 @@ export function VoiceCoachingSession({
   const audioChunksRef = useRef<Blob[]>([]);
 
   useEffect(() => {
-    agentRef.current = new ElevenLabsCoachAgent();
+    try {
+      console.log('🎯 Initializing ElevenLabs Coach Agent...');
+      agentRef.current = new ElevenLabsCoachAgent();
+      console.log('✅ ElevenLabs Coach Agent initialized');
+    } catch (error: any) {
+      console.error('❌ Failed to initialize ElevenLabs agent:', error);
+      alert(`Failed to initialize voice coaching:\n\n${error.message}\n\nPlease ensure ElevenLabs API credentials are configured in your environment.`);
+    }
     
     return () => {
       if (agentRef.current) {
+        console.log('🔌 Disconnecting ElevenLabs agent...');
         agentRef.current.disconnect();
       }
     };
@@ -46,16 +54,23 @@ export function VoiceCoachingSession({
 
   const startSession = async () => {
     try {
-      if (!agentRef.current) return;
+      if (!agentRef.current) {
+        alert('Voice coaching agent not initialized. Please refresh the page.');
+        return;
+      }
+
+      console.log('🎤 Starting voice coaching session...');
 
       // Start conversation
       const sid = await agentRef.current.startConversation();
       setSessionId(sid);
+      console.log('✅ Session ID:', sid);
 
       // Connect WebSocket
       agentRef.current.connectWebSocket(
         (text, audio) => {
           if (text) {
+            console.log('📝 Agent text:', text);
             setMessages((prev) => [
               ...prev,
               {
@@ -66,12 +81,14 @@ export function VoiceCoachingSession({
             ]);
           }
           if (audio) {
+            console.log('🔊 Playing audio response');
             playAudioResponse(audio);
           }
         },
         (error) => {
-          console.error('Agent error:', error);
-          alert('Connection error. Please try again.');
+          console.error('❌ Agent error:', error);
+          alert('Connection error: ' + error.message);
+          setIsConnected(false);
         }
       );
 
@@ -85,9 +102,12 @@ export function VoiceCoachingSession({
           timestamp: new Date(),
         },
       ]);
-    } catch (error) {
-      console.error('Failed to start session:', error);
-      alert('Could not connect to coaching agent. Please check your connection.');
+
+      console.log('✅ Voice coaching session started successfully');
+    } catch (error: any) {
+      console.error('❌ Failed to start session:', error);
+      const errorMessage = error.message || 'Unknown error';
+      alert(`Could not connect to coaching agent:\n\n${errorMessage}\n\nPlease check:\n- Your internet connection\n- ElevenLabs API credentials are configured\n- Browser console for more details`);
     }
   };
 

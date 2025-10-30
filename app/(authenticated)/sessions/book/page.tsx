@@ -1,253 +1,119 @@
 'use client';
 
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
-import { Button } from '@/components/ui/button';
-import { Textarea } from '@/components/ui/textarea';
-import { Badge } from '@/components/ui/badge';
-import { Calendar, Clock, Video, User } from 'lucide-react';
+import { getCurrentUser } from '@/lib/auth';
+import { Card, CardContent } from '@/components/ui/card';
+import { AppFooter } from '@/components/app-footer';
+import { AppHeader } from '@/components/app-header';
+import { coaches } from '@/lib/coach-data';
 
 export default function BookSessionPage() {
   const router = useRouter();
-  const [selectedDate, setSelectedDate] = useState<string | null>(null);
-  const [selectedTime, setSelectedTime] = useState<string | null>(null);
-  const [focusArea, setFocusArea] = useState('');
-  const [sessionType, setSessionType] = useState<'video' | 'phone'>('video');
+  const [user, setUser] = useState<any>(null);
+  const [loading, setLoading] = useState(true);
+  const [selectedCoach, setSelectedCoach] = useState<string | null>(null);
 
-  // Mock available slots
-  const availableSlots = [
-    {
-      date: '2025-11-02',
-      displayDate: 'Thursday, November 2',
-      times: ['10:00 AM', '2:00 PM', '4:00 PM']
-    },
-    {
-      date: '2025-11-03',
-      displayDate: 'Friday, November 3',
-      times: ['9:00 AM', '11:00 AM', '2:00 PM', '3:00 PM']
-    },
-    {
-      date: '2025-11-06',
-      displayDate: 'Monday, November 6',
-      times: ['10:00 AM', '1:00 PM', '3:00 PM', '5:00 PM']
+  useEffect(() => {
+    const currentUser = getCurrentUser();
+    if (!currentUser) {
+      router.push('/login');
+    } else {
+      setUser(currentUser);
+      setLoading(false);
     }
-  ];
+  }, [router]);
 
-  const coach = {
-    name: 'Sarah Johnson',
-    title: 'ICF Certified Professional Coach',
-    specialties: ['Leadership', 'Career Transitions', 'Team Management'],
-    experience: '15+ years',
-    sessions: '1,200+ sessions'
-  };
-
-  const handleBooking = async () => {
-    if (!selectedDate || !selectedTime) return;
-
-    // TODO: Save booking to database
-    // const { data, error } = await supabase
-    //   .from('bookings')
-    //   .insert({
-    //     user_id: user.id,
-    //     coach_id: coach.id,
-    //     date: selectedDate,
-    //     time: selectedTime,
-    //     type: sessionType,
-    //     focus_area: focusArea
-    //   });
-
-    // Mock success
-    alert(`Session booked! ${sessionType === 'video' ? 'Video' : 'Phone'} call on ${selectedDate} at ${selectedTime}`);
-    router.push('/dashboard');
-  };
+  if (loading) {
+    return (
+      <div className="min-h-screen flex items-center justify-center bg-stone-50">
+        <p className="text-stone-600">Laddar...</p>
+      </div>
+    );
+  }
 
   return (
-    <div className="min-h-screen bg-stone-50 pb-20">
-      {/* Header */}
-      <div className="bg-white border-b border-stone-200 px-4 py-6">
-        <div className="max-w-2xl mx-auto">
-          <Button 
-            variant="ghost" 
-            size="sm" 
-            onClick={() => router.back()}
-            className="mb-2"
-          >
-            ← Back
-          </Button>
-          <h1 className="text-2xl font-bold text-stone-900">Book Human Coach Session</h1>
-          <p className="text-stone-600 mt-1">
-            Schedule a 1-on-1 session with your coach
-          </p>
-        </div>
-      </div>
+    <div className="min-h-screen bg-stone-50">
+      <AppHeader 
+        title="Boka session"
+        subtitle="Välj din coach"
+        showBack
+      />
 
-      {/* Content */}
-      <div className="max-w-2xl mx-auto px-4 py-6 space-y-6">
+      <div className="max-w-2xl mx-auto px-4 py-6 pb-24 space-y-4">
         
-        {/* Coach Info */}
-        <Card>
-          <CardHeader>
-            <div className="flex items-start gap-4">
-              <div className="w-16 h-16 rounded-full bg-stone-200 flex items-center justify-center">
-                <User className="h-8 w-8 text-stone-600" />
-              </div>
-              <div className="flex-1">
-                <CardTitle>{coach.name}</CardTitle>
-                <CardDescription>{coach.title}</CardDescription>
-                <div className="flex gap-2 mt-2">
-                  <Badge className="bg-stone-100 text-stone-800 border-stone-200">
-                    {coach.experience}
-                  </Badge>
-                  <Badge className="bg-stone-100 text-stone-800 border-stone-200">
-                    {coach.sessions}
-                  </Badge>
-                </div>
-              </div>
-            </div>
-          </CardHeader>
-          <CardContent>
-            <p className="text-sm text-stone-700 mb-2">Specialties:</p>
-            <div className="flex flex-wrap gap-2">
-              {coach.specialties.map((specialty) => (
-                <Badge 
-                  key={specialty}
-                  className="bg-stone-50 text-stone-900 border-stone-200"
-                >
-                  {specialty}
-                </Badge>
-              ))}
-            </div>
-          </CardContent>
-        </Card>
-
-        {/* Session Type */}
-        <Card>
-          <CardHeader>
-            <CardTitle>Session Type</CardTitle>
-            <CardDescription>Choose how you'd like to connect</CardDescription>
-          </CardHeader>
-          <CardContent className="grid grid-cols-2 gap-3">
-            <Button
-              variant={sessionType === 'video' ? 'default' : 'outline'}
-              className="h-auto py-4 flex flex-col items-center gap-2"
-              onClick={() => setSessionType('video')}
+        <div className="space-y-3">
+          {coaches.map((coach) => (
+            <Card 
+              key={coach.id}
+              className={`cursor-pointer transition-all border-2 ${
+                selectedCoach === coach.id 
+                  ? 'border-purple-600 bg-purple-50' 
+                  : 'border-stone-200 bg-white hover:border-stone-300'
+              }`}
+              onClick={() => setSelectedCoach(coach.id)}
             >
-              <Video className="h-6 w-6" />
-              <span>Video Call</span>
-            </Button>
-            <Button
-              variant={sessionType === 'phone' ? 'default' : 'outline'}
-              className="h-auto py-4 flex flex-col items-center gap-2"
-              onClick={() => setSessionType('phone')}
+              <CardContent className="pt-5 pb-5">
+                <div className="flex gap-4">
+                  {/* Coach Image */}
+                  <div className="flex-shrink-0">
+                    <div className="w-16 h-16 rounded-full overflow-hidden border-2 border-stone-200">
+                      <img 
+                        src={coach.image} 
+                        alt={coach.name}
+                        className="w-full h-full object-cover"
+                      />
+                    </div>
+                  </div>
+
+                  {/* Coach Info */}
+                  <div className="flex-1">
+                    <h3 className="font-semibold text-base text-stone-900 mb-1">
+                      {coach.name}
+                    </h3>
+                    <p className="text-sm text-stone-600 mb-2">{coach.title}</p>
+                    <div className="flex flex-wrap gap-1.5">
+                      {coach.specialties.slice(0, 3).map((specialty, idx) => (
+                        <span 
+                          key={idx}
+                          className="text-xs px-2 py-1 bg-stone-100 text-stone-700 rounded-full"
+                        >
+                          {specialty}
+                        </span>
+                      ))}
+                    </div>
+                  </div>
+
+                  {/* Selection Indicator */}
+                  {selectedCoach === coach.id && (
+                    <div className="flex-shrink-0 self-start">
+                      <div className="w-6 h-6 rounded-full bg-purple-600 flex items-center justify-center">
+                        <svg className="w-4 h-4 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
+                        </svg>
+                      </div>
+                    </div>
+                  )}
+                </div>
+              </CardContent>
+            </Card>
+          ))}
+        </div>
+
+        {/* Continue Button */}
+        {selectedCoach && (
+          <div className="pt-4">
+            <button
+              onClick={() => router.push(`/sessions/schedule/${selectedCoach}`)}
+              className="w-full px-6 py-4 bg-purple-600 text-white rounded-2xl text-base font-semibold hover:bg-purple-700 transition-colors shadow-lg"
             >
-              <Clock className="h-6 w-6" />
-              <span>Phone Call</span>
-            </Button>
-          </CardContent>
-        </Card>
-
-        {/* Select Date & Time */}
-        <Card>
-          <CardHeader>
-            <CardTitle>Select Date & Time</CardTitle>
-            <CardDescription>Choose your preferred time slot</CardDescription>
-          </CardHeader>
-          <CardContent className="space-y-4">
-            {availableSlots.map((slot) => (
-              <div key={slot.date} className="space-y-2">
-                <div className="flex items-center gap-2 text-sm font-medium text-stone-900">
-                  <Calendar className="h-4 w-4" />
-                  {slot.displayDate}
-                </div>
-                <div className="grid grid-cols-3 gap-2">
-                  {slot.times.map((time) => {
-                    const isSelected = selectedDate === slot.date && selectedTime === time;
-                    return (
-                      <Button
-                        key={time}
-                        variant={isSelected ? 'default' : 'outline'}
-                        size="sm"
-                        onClick={() => {
-                          setSelectedDate(slot.date);
-                          setSelectedTime(time);
-                        }}
-                      >
-                        {time}
-                      </Button>
-                    );
-                  })}
-                </div>
-              </div>
-            ))}
-          </CardContent>
-        </Card>
-
-        {/* Focus Area (Optional) */}
-        <Card>
-          <CardHeader>
-            <CardTitle>Focus Area (Optional)</CardTitle>
-            <CardDescription>
-              What would you like to work on in this session?
-            </CardDescription>
-          </CardHeader>
-          <CardContent>
-            <Textarea
-              placeholder="e.g., Team motivation, difficult conversation with employee, career direction..."
-              value={focusArea}
-              onChange={(e) => setFocusArea(e.target.value)}
-              rows={4}
-              className="text-base"
-            />
-          </CardContent>
-        </Card>
-
-        {/* Booking Summary */}
-        {selectedDate && selectedTime && (
-          <Card className="bg-stone-100 border-stone-200">
-            <CardContent className="pt-6">
-              <h3 className="font-semibold text-stone-900 mb-3">Booking Summary</h3>
-              <div className="space-y-2 text-sm">
-                <div className="flex justify-between">
-                  <span className="text-stone-600">Coach:</span>
-                  <span className="text-stone-900 font-medium">{coach.name}</span>
-                </div>
-                <div className="flex justify-between">
-                  <span className="text-stone-600">Type:</span>
-                  <span className="text-stone-900 font-medium">
-                    {sessionType === 'video' ? 'Video Call' : 'Phone Call'}
-                  </span>
-                </div>
-                <div className="flex justify-between">
-                  <span className="text-stone-600">Date:</span>
-                  <span className="text-stone-900 font-medium">
-                    {availableSlots.find(s => s.date === selectedDate)?.displayDate}
-                  </span>
-                </div>
-                <div className="flex justify-between">
-                  <span className="text-stone-600">Time:</span>
-                  <span className="text-stone-900 font-medium">{selectedTime}</span>
-                </div>
-                <div className="flex justify-between">
-                  <span className="text-stone-600">Duration:</span>
-                  <span className="text-stone-900 font-medium">60 minutes</span>
-                </div>
-              </div>
-            </CardContent>
-          </Card>
+              Välj tid för session
+            </button>
+          </div>
         )}
-
-        {/* Confirm Button */}
-        <Button 
-          className="w-full" 
-          size="lg"
-          disabled={!selectedDate || !selectedTime}
-          onClick={handleBooking}
-        >
-          Confirm Booking
-        </Button>
       </div>
+
+      <AppFooter />
     </div>
   );
 }
-
