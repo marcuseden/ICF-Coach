@@ -41,7 +41,7 @@ export default function HomePage() {
       <PublicHeader />
       <div className="min-h-screen bg-stone-50">
         {/* Hero Section - Full Width Background Image */}
-        <section className="relative min-h-screen flex items-center justify-center overflow-hidden">
+        <section className="relative min-h-screen flex items-center overflow-hidden">
           {/* Background Image */}
           <div className="absolute inset-0 z-0">
             <img 
@@ -49,28 +49,30 @@ export default function HomePage() {
               alt="Professional coaching environment"
               className="w-full h-full object-cover"
             />
-            {/* Dark overlay for text readability */}
-            <div className="absolute inset-0 bg-gradient-to-b from-stone-900/70 via-stone-900/60 to-stone-900/70 z-10" />
+            {/* Gradient overlay - right side for text readability */}
+            <div className="absolute inset-0 bg-gradient-to-l from-stone-900/85 via-stone-900/50 to-transparent z-10" />
           </div>
           
-          {/* Hero Content */}
-          <div className="relative z-20 w-full max-w-5xl mx-auto px-6 py-20 md:py-32 text-center">
-            <h1 className="text-5xl sm:text-6xl md:text-7xl lg:text-8xl font-bold text-white mb-6 md:mb-8 leading-[1.1] tracking-tight">
-              {t.hero.title[0]}<br />
-              <span className="text-white/90">{t.hero.title[1]}</span><br />
-              <span className="text-white/80">{t.hero.title[2]}</span>
-            </h1>
-            <p className="text-lg sm:text-xl md:text-2xl lg:text-3xl text-white/95 mb-10 md:mb-16 max-w-3xl mx-auto font-light leading-relaxed px-4">
-              {t.hero.subtitle[0]}
-              <span className="block mt-2">{t.hero.subtitle[1]}</span>
-            </p>
-            <div className="flex justify-center px-4">
-              <button
-                onClick={() => router.push('/signup')}
-                className="px-10 py-3.5 bg-white text-stone-900 rounded-full text-base font-medium hover:bg-stone-100 transition-colors shadow-lg"
-              >
-                {t.hero.cta}
-              </button>
+          {/* Hero Content - Positioned Right */}
+          <div className="relative z-20 w-full max-w-7xl mx-auto px-6 py-20 md:py-32">
+            <div className="ml-auto max-w-2xl">
+              <h1 className="text-5xl sm:text-6xl md:text-7xl lg:text-8xl font-bold text-white mb-6 md:mb-8 leading-[1.1] tracking-tight">
+                {t.hero.title[0]}<br />
+                <span className="text-white/90">{t.hero.title[1]}</span><br />
+                <span className="text-white/80">{t.hero.title[2]}</span>
+              </h1>
+              <p className="text-lg sm:text-xl md:text-2xl lg:text-3xl text-white/95 mb-10 md:mb-16 font-light leading-relaxed">
+                {t.hero.subtitle[0]}
+                <span className="block mt-2">{t.hero.subtitle[1]}</span>
+              </p>
+              <div>
+                <button
+                  onClick={() => router.push('/signup')}
+                  className="px-10 py-3.5 bg-white text-stone-900 rounded-full text-base font-medium hover:bg-stone-100 transition-colors shadow-lg"
+                >
+                  {t.hero.cta}
+                </button>
+              </div>
             </div>
           </div>
 
