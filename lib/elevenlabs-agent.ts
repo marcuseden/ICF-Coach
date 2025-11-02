@@ -96,12 +96,15 @@ export class ElevenLabsCoachAgent {
         return;
       }
 
-      // ElevenLabs Conversational AI WebSocket URL - direct connection with agent_id
+      // ElevenLabs Conversational AI WebSocket URL - direct connection with agent_id and API key
       const wsUrl = `wss://api.elevenlabs.io/v1/convai/conversation?agent_id=${this.agentId}`;
       
       console.log('🔌 Connecting to WebSocket:', wsUrl);
+      console.log('🔑 Using API Key:', this.apiKey.substring(0, 10) + '...');
       
-      this.ws = new WebSocket(wsUrl);
+      // Create WebSocket with API key in URL for authentication
+      const authenticatedWsUrl = `${wsUrl}&xi_api_key=${this.apiKey}`;
+      this.ws = new WebSocket(authenticatedWsUrl);
       this.ws.binaryType = 'arraybuffer';
 
       this.ws.onopen = () => {
@@ -134,6 +137,7 @@ export class ElevenLabsCoachAgent {
         try {
           const data = JSON.parse(event.data);
           console.log('📨 Received message type:', data.type);
+          console.log('📨 Full message data:', JSON.stringify(data, null, 2));
           
           // Handle different message types from ElevenLabs
           switch (data.type) {
