@@ -21,6 +21,10 @@ export interface Translations {
   // Navigation
   nav: {
     home: string;
+    features: string;
+    pricing: string;
+    howItWorks: string;
+    about: string;
     dashboard: string;
     sessions: string;
     book: string;
@@ -782,6 +786,120 @@ export const translations: Record<Language, Translations> = {
       continuousGrowth: {
         title: 'Continuous Growth',
         description: 'Build momentum with weekly check-ins and insights',
+      },
+    },
+    
+    featuresPage: {
+      hero: {
+        title: 'Powerful tools for your growth',
+        subtitle: 'AI-powered coaching combined with human expertise for real transformation',
+      },
+      voiceCoach: {
+        subtitle: 'VOICE COACHING',
+        title: 'Your AI coach. Available anytime.',
+        description: 'Hold to speak. Get instant guidance. Build momentum between sessions with a coach that never sleeps.',
+        details: [
+          'ICF-certified coaching available 24/7',
+          'Remembers all your goals and commitments',
+          'Asks powerful questions that unlock new perspectives',
+          'Perfect for quick check-ins between sessions'
+        ],
+      },
+      videoSessions: {
+        subtitle: 'VIDEO SESSIONS',
+        title: 'Real coaches. Real transformation.',
+        description: 'Connect with ICF-certified professionals who\'ve guided thousands through their toughest leadership challenges.',
+        details: [
+          'Book sessions that fit your schedule',
+          'Video or phone - your choice',
+          'Every coach has 500+ hours of certified training',
+          'Specialized in leadership and team development'
+        ],
+      },
+      smartScheduling: {
+        subtitle: 'SMART SCHEDULING',
+        title: 'Coaching that fits your life',
+        description: 'Book sessions that work for you, not the other way around. Our smart system finds the perfect times.',
+        details: [
+          'See real-time availability',
+          'Book, reschedule, or cancel easily',
+          'Automatic reminders and preparation',
+          'Syncs with your calendar'
+        ],
+      },
+      commitmentTracking: {
+        subtitle: 'COMMITMENT TRACKING',
+        title: 'Transform insights into action',
+        description: 'Every coaching session generates commitments. Our system helps you follow through.',
+        details: [
+          'Track progress toward each commitment',
+          'Weekly check-ins keep you accountable',
+          'See patterns in what works',
+          'Build momentum with small wins'
+        ],
+      },
+      growthInsights: {
+        subtitle: 'GROWTH INSIGHTS',
+        title: 'See yourself grow. Week by week.',
+        description: 'Measure confidence. Track commitments. Watch patterns emerge as small actions compound into major breakthroughs.',
+        details: [
+          'Visual dashboards show your progress',
+          'Track confidence over time',
+          'Identify what works best',
+          'Share progress with your coach'
+        ],
+      },
+      icfCertified: {
+        subtitle: 'ICF CERTIFIED',
+        title: 'World-class coaching standards',
+        description: 'Every coach and every session follows the framework from the International Coach Federation.',
+        details: [
+          'All coaches are ICF certified',
+          'Proven methods for lasting change',
+          'Ethical guidelines and confidentiality',
+          'Ongoing professional development'
+        ],
+      },
+      wearables: {
+        title: 'Connect your devices',
+        subtitle: 'Integrate your health and fitness data for deeper insights',
+        appleWatch: {
+          title: 'Apple Watch',
+          description: 'Sync activity, sleep, and mindfulness data',
+          features: [
+            'Automatic activity tracking',
+            'Sleep analysis',
+            'Heart rate data',
+            'Mindfulness minutes'
+          ],
+        },
+        ouraRing: {
+          title: 'Oura Ring',
+          description: 'Deep sleep and recovery insights',
+          features: [
+            'Sleep stages and quality',
+            'Recovery score',
+            'Readiness to perform',
+            'Activity balance'
+          ],
+        },
+        whoop: {
+          title: 'WHOOP Band',
+          description: 'Professional training and recovery tracking',
+          features: [
+            'Strain score',
+            'Recovery',
+            'Sleep performance',
+            'Training recommendations'
+          ],
+        },
+        connectMessage: 'Connect your devices to give your coach the complete picture of your health and performance.',
+        getStarted: 'Get Started',
+      },
+      cta: {
+        title: 'Ready to start your growth journey?',
+        subtitle: 'Join thousands of leaders transforming their leadership with AI-powered coaching.',
+        button: 'Get Started Today',
       },
     },
     
