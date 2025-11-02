@@ -71,6 +71,76 @@ export interface Translations {
     };
   };
   
+  // Features Page
+  featuresPage: {
+    hero: {
+      title: string;
+      subtitle: string;
+    };
+    voiceCoach: {
+      subtitle: string;
+      title: string;
+      description: string;
+      details: string[];
+    };
+    videoSessions: {
+      subtitle: string;
+      title: string;
+      description: string;
+      details: string[];
+    };
+    smartScheduling: {
+      subtitle: string;
+      title: string;
+      description: string;
+      details: string[];
+    };
+    commitmentTracking: {
+      subtitle: string;
+      title: string;
+      description: string;
+      details: string[];
+    };
+    growthInsights: {
+      subtitle: string;
+      title: string;
+      description: string;
+      details: string[];
+    };
+    icfCertified: {
+      subtitle: string;
+      title: string;
+      description: string;
+      details: string[];
+    };
+    wearables: {
+      title: string;
+      subtitle: string;
+      appleWatch: {
+        title: string;
+        description: string;
+        features: string[];
+      };
+      ouraRing: {
+        title: string;
+        description: string;
+        features: string[];
+      };
+      whoop: {
+        title: string;
+        description: string;
+        features: string[];
+      };
+      connectMessage: string;
+      getStarted: string;
+    };
+    cta: {
+      title: string;
+      subtitle: string;
+      button: string;
+    };
+  };
+  
   // Packages
   packages: {
     heading: string;
@@ -269,6 +339,10 @@ export const translations: Record<Language, Translations> = {
     
     nav: {
       home: 'Hem',
+      features: 'Funktioner',
+      pricing: 'Priser',
+      howItWorks: 'Så fungerar det',
+      about: 'Om oss',
       dashboard: 'Översikt',
       sessions: 'Sessioner',
       book: 'Boka',
@@ -317,6 +391,120 @@ export const translations: Record<Language, Translations> = {
       continuousGrowth: {
         title: 'Kontinuerlig tillväxt',
         description: 'Bygg momentum med veckovisa check-ins och insikter',
+      },
+    },
+    
+    featuresPage: {
+      hero: {
+        title: 'Kraftfulla verktyg för din tillväxt',
+        subtitle: 'AI-driven coaching kombinerad med mänsklig expertis för verklig transformation',
+      },
+      voiceCoach: {
+        subtitle: 'RÖSTCOACHING',
+        title: 'Din AI-coach. Tillgänglig när som helst.',
+        description: 'Håll in för att prata. Få omedelbar vägledning. Bygg momentum mellan sessioner med en coach som aldrig sover.',
+        details: [
+          'ICF-certifierad coaching tillgänglig 24/7',
+          'Minns alla dina mål och åtaganden',
+          'Ställer kraftfulla frågor som låser upp nya perspektiv',
+          'Perfekt för snabba check-ins mellan sessioner'
+        ],
+      },
+      videoSessions: {
+        subtitle: 'VIDEOSESSIONER',
+        title: 'Riktiga coacher. Riktig transformation.',
+        description: 'Anslut med ICF-certifierade proffs som har guidat tusentals genom deras tuffaste ledarutmaningar.',
+        details: [
+          'Boka sessioner som passar ditt schema',
+          'Video eller telefon - ditt val',
+          'Varje coach har 500+ timmar av certifierad utbildning',
+          'Specialiserade i ledarskap och teamutveckling'
+        ],
+      },
+      smartScheduling: {
+        subtitle: 'SMART SCHEMALÄGGNING',
+        title: 'Coaching som passar ditt liv',
+        description: 'Boka sessioner som fungerar för dig, inte tvärtom. Vårt smarta system hittar de perfekta tiderna.',
+        details: [
+          'Se tillgänglighet i realtid',
+          'Boka, omboka eller avboka enkelt',
+          'Automatiska påminnelser och förberedelser',
+          'Synkroniserar med din kalender'
+        ],
+      },
+      commitmentTracking: {
+        subtitle: 'ÅTAGANDE-SPÅRNING',
+        title: 'Förvandla insikter till handling',
+        description: 'Varje coaching-session genererar åtaganden. Vårt system hjälper dig att följa dem.',
+        details: [
+          'Spåra framsteg mot varje åtagande',
+          'Veckovisa check-ins håller dig ansvarig',
+          'Se mönster i vad som fungerar',
+          'Bygg momentum med små vinster'
+        ],
+      },
+      growthInsights: {
+        subtitle: 'TILLVÄXT-INSIKTER',
+        title: 'Se dig själv växa. Vecka för vecka.',
+        description: 'Mät självförtroende. Följ åtaganden. Se mönster växa fram när små handlingar förvandlas till stora genombrott.',
+        details: [
+          'Visuella instrumentpaneler visar din framsteg',
+          'Följ självförtroende över tid',
+          'Identifiera vad som fungerar bäst',
+          'Dela framsteg med din coach'
+        ],
+      },
+      icfCertified: {
+        subtitle: 'ICF-CERTIFIERAD',
+        title: 'Världsklass coaching-standarder',
+        description: 'Varje coach och varje session följer ramverket från International Coach Federation.',
+        details: [
+          'Alla coacher är ICF-certifierade',
+          'Beprövade metoder för bestående förändring',
+          'Etiska riktlinjer och konfidentialitet',
+          'Kontinuerlig professionell utveckling'
+        ],
+      },
+      wearables: {
+        title: 'Anslut dina enheter',
+        subtitle: 'Integrera dina hälso- och träningsdata för djupare insikter',
+        appleWatch: {
+          title: 'Apple Watch',
+          description: 'Synkronisera aktivitet, sömn och mindfulness-data',
+          features: [
+            'Automatisk aktivitetsspårning',
+            'Sömnanalys',
+            'Hjärtfrekvensdata',
+            'Mindfulness-minuter'
+          ],
+        },
+        ouraRing: {
+          title: 'Oura Ring',
+          description: 'Djupgående sömn- och återhämtningsinsikter',
+          features: [
+            'Sömnstadier och kvalitet',
+            'Återhämtningspoäng',
+            'Beredskap att prestera',
+            'Aktivitetsbalans'
+          ],
+        },
+        whoop: {
+          title: 'WHOOP Band',
+          description: 'Professionell tränings- och återhämtningsspårning',
+          features: [
+            'Ansträngningspoäng',
+            'Återhämtning',
+            'Sömnprestation',
+            'Träningsrekommendationer'
+          ],
+        },
+        connectMessage: 'Anslut dina enheter för att ge din coach fullständig bild av din hälsa och prestanda.',
+        getStarted: 'Kom igång',
+      },
+      cta: {
+        title: 'Redo att börja din tillväxtresa?',
+        subtitle: 'Gå med tusentals ledare som transformerar sitt ledarskap med AI-driven coaching.',
+        button: 'Kom igång idag',
       },
     },
     
@@ -491,18 +679,6 @@ export const translations: Record<Language, Translations> = {
       markComplete: 'Markera som klar',
     },
     
-    sessions: {
-      title: 'Sessioner',
-      upcoming: 'Kommande',
-      completed: 'Genomförda',
-      schedule: 'Schemalägg',
-      withCoach: 'med',
-      duration: 'min',
-      topics: 'Ämnen',
-      voiceSession: 'Röstsession',
-      videoSession: 'Videosession',
-    },
-    
     auth: {
       login: {
         title: 'Logga in',
@@ -554,6 +730,10 @@ export const translations: Record<Language, Translations> = {
     
     nav: {
       home: 'Home',
+      features: 'Features',
+      pricing: 'Pricing',
+      howItWorks: 'How It Works',
+      about: 'About',
       dashboard: 'Dashboard',
       sessions: 'Sessions',
       book: 'Book',
@@ -774,18 +954,6 @@ export const translations: Record<Language, Translations> = {
       dueDate: 'Due date',
       status: 'Status',
       markComplete: 'Mark complete',
-    },
-    
-    sessions: {
-      title: 'Sessions',
-      upcoming: 'Upcoming',
-      completed: 'Completed',
-      schedule: 'Schedule',
-      withCoach: 'with',
-      duration: 'min',
-      topics: 'Topics',
-      voiceSession: 'Voice Session',
-      videoSession: 'Video Session',
     },
     
     auth: {
